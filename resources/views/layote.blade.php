@@ -60,6 +60,8 @@
 </head>
 
 <body>
+
+    @if($type!="login")
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
@@ -594,7 +596,12 @@
     </div>
     <!-- End Footer area-->
     <!-- jquery
-		============================================ -->
+        ============================================ -->
+        @else
+        @yield('content')
+    @endif    
+
+
     <script src="{{asset('assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
     <!-- bootstrap JS
 		============================================ -->
