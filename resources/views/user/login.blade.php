@@ -9,22 +9,37 @@
        
         <!-- Login -->
         <div class="nk-block toggled" id="l-login">
-            {{Form::open(['name'=>"formLogin", 'url'=>"logar", 'method'=>"post"]) }}
+            {{Form::open(['name'=>"formLogin", 'url'=>"/logar", 'method'=>"post"]) }}
+            {{csrf_field()}}
+					@if(session('error'))
+					<div class="alert alert-danger">{{session('error')}}</div>
+					@endif
+
+					@if(session('success'))
+					<div class="alert alert-success">{{session('success')}}</div>
+                    @endif
+                    
             <div class="nk-form">
                 <div class="input-group">
                     <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
                     <div class="nk-int-st">
-                        <input type="text" class="form-control" placeholder="Username">
+                        <input type="text" name="username" class="form-control" placeholder="Usuário"/>
+                        @if($errors->has('username'))
+						<span class="text-danger">{{$errors->first('username')}}</span>
+						@endif
                     </div>
                 </div>
                 <div class="input-group mg-t-15">
                     <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-edit"></i></span>
                     <div class="nk-int-st">
-                        <input type="password" class="form-control" placeholder="Password">
+                        <input type="password" name="password" class="form-control" placeholder="Palavra-Passe"/>
+                        @if($errors->has('password'))
+						<span class="text-danger">{{$errors->first('password')}}</span>
+						@endif
                     </div>
                 </div>
                 <div class="fm-checkbox">
-                    <label><input type="checkbox" class="i-checks"> <i></i> Keep me signed in</label>
+                    <label><input type="checkbox" class="i-checks"> <i></i> Lembrar-me</label>
                 </div>
                 <button type="submit" data-ma-action="nk-login-switch" data-ma-block="#l-register" class="btn btn-login btn-success btn-float"><i class="notika-icon notika-right-arrow right-arrow-ant"></i></button>
             </div>
