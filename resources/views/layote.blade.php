@@ -669,6 +669,8 @@
 	<!-- tawk chat JS
 		============================================ -->
     <script src="{{asset('assets/js/tawk-chat.js')}}"></script>
+
+    <script src="{{asset('assetsjs/login/login-action.js')}}"></script>
 </body>
 
 </html>

@@ -6,8 +6,10 @@
         <![endif]-->
     <!-- Login Register area Start-->
     <div class="login-content">
+       
         <!-- Login -->
         <div class="nk-block toggled" id="l-login">
+            {{Form::open(['name'=>"formLogin", 'url'=>"logar", 'method'=>"post"]) }}
             <div class="nk-form">
                 <div class="input-group">
                     <span class="input-group-addon nk-ic-st-pro"><i class="notika-icon notika-support"></i></span>
@@ -24,15 +26,16 @@
                 <div class="fm-checkbox">
                     <label><input type="checkbox" class="i-checks"> <i></i> Keep me signed in</label>
                 </div>
-                <a href="#l-register" data-ma-action="nk-login-switch" data-ma-block="#l-register" class="btn btn-login btn-success btn-float"><i class="notika-icon notika-right-arrow right-arrow-ant"></i></a>
+                <button type="submit" data-ma-action="nk-login-switch" data-ma-block="#l-register" class="btn btn-login btn-success btn-float"><i class="notika-icon notika-right-arrow right-arrow-ant"></i></button>
             </div>
 
             <div class="nk-navigation nk-lg-ic">
                 <a href="#" data-ma-action="nk-login-switch" data-ma-block="#l-register"><i class="notika-icon notika-plus-symbol"></i> <span>Register</span></a>
                 <a href="#" data-ma-action="nk-login-switch" data-ma-block="#l-forget-password"><i>?</i> <span>Forgot Password</span></a>
             </div>
+            {{Form::close()}}
         </div>
-
+   
         <!-- Register -->
         <div class="nk-block" id="l-register">
             <div class="nk-form">
@@ -86,6 +89,7 @@
                 <a href="" data-ma-action="nk-login-switch" data-ma-block="#l-register"><i class="notika-icon notika-plus-symbol"></i> <span>Register</span></a>
             </div>
         </div>
+    
     </div>
            
    @endsection
