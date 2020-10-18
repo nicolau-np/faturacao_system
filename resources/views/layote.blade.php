@@ -361,84 +361,54 @@
                                         
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demoevent" href="#">Email</a>
+                                <li><a data-toggle="collapse" data-target="#demoevent" href="#">Funcionários</a>
                                     <ul id="demoevent" class="collapse dropdown-header-top">
-                                        <li><a href="inbox.html">Inbox</a></li>
-                                        <li><a href="view-email.html">View Email</a></li>
-                                        <li><a href="compose-email.html">Compose Email</a></li>
+                                        <li><a href="/funcionarios">Lista</a></li>
+                                        <li><a href="/funcionarios/novo">Novo</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#democrou" href="#">Interface</a>
+                                <li><a data-toggle="collapse" data-target="#democrou" href="#">Clientes</a>
                                     <ul id="democrou" class="collapse dropdown-header-top">
-                                        <li><a href="animations.html">Animations</a></li>
-                                        <li><a href="google-map.html">Google Map</a></li>
-                                        <li><a href="data-map.html">Data Maps</a></li>
-                                        <li><a href="code-editor.html">Code Editor</a></li>
-                                        <li><a href="image-cropper.html">Images Cropper</a></li>
-                                        <li><a href="wizard.html">Wizard</a></li>
+                                        <li><a href="/clientes">Lista</a></li>
+                                        <li><a href="/clientes/novo">Novo</a></li>
+                                        <li><a href="/clientes/favoritos">Favoritos</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Charts</a>
+                                <li><a data-toggle="collapse" data-target="#demolibra" href="#">Fornecedores</a>
                                     <ul id="demolibra" class="collapse dropdown-header-top">
-                                        <li><a href="flot-charts.html">Flot Charts</a></li>
-                                        <li><a href="bar-charts.html">Bar Charts</a></li>
-                                        <li><a href="line-charts.html">Line Charts</a></li>
-                                        <li><a href="area-charts.html">Area Charts</a></li>
+                                        <li><a href="/fornecedores">Lista</a></li>
+                                        <li><a href="/fornecedores/novo">Novo</a></li>
+                                        <li><a href="/fornecedores/descatados">Destacados</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demodepart" href="#">Tables</a>
+                                <li><a data-toggle="collapse" data-target="#demodepart" href="#">Produtos</a>
                                     <ul id="demodepart" class="collapse dropdown-header-top">
-                                        <li><a href="normal-table.html">Normal Table</a></li>
-                                        <li><a href="data-table.html">Data Table</a></li>
+                                        <li><a href="/produtos">Lista</a></li>
+                                        <li><a href="/produtos/novo">Novo</a></li>
+                                        <li><a href="/produtos/escassos">Escaços</a></li>
+                                        <li><a href="/produtos/stoque">Stoque</a></li>
+                                        <li><a href="/produtos/validade">Fora de Validade</a></li>
+                                        <li><a href="/produtos/inventario">Inventário</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#demo" href="#">Forms</a>
+                                <li><a data-toggle="collapse" data-target="#demo" href="#">Compras</a>
                                     <ul id="demo" class="collapse dropdown-header-top">
-                                        <li><a href="form-elements.html">Form Elements</a></li>
-                                        <li><a href="form-components.html">Form Components</a></li>
-                                        <li><a href="form-examples.html">Form Examples</a></li>
+                                        <li><a href="/compras">Lista</a></li>
+                                        <li><a href="/compras/novo">Nova</a></li>
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">App views</a>
+                                <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Vendas</a>
                                     <ul id="Miscellaneousmob" class="collapse dropdown-header-top">
-                                        <li><a href="notification.html">Notifications</a>
+                                        <li><a href="/vendas">Lista</a>
                                         </li>
-                                        <li><a href="alert.html">Alerts</a>
+                                        <li><a href="/vendas/novo">Nova</a>
                                         </li>
-                                        <li><a href="modals.html">Modals</a>
+                                        <li><a href="/vendas/estado">Estado</a>
                                         </li>
-                                        <li><a href="buttons.html">Buttons</a>
-                                        </li>
-                                        <li><a href="tabs.html">Tabs</a>
-                                        </li>
-                                        <li><a href="accordion.html">Accordion</a>
-                                        </li>
-                                        <li><a href="dialog.html">Dialogs</a>
-                                        </li>
-                                        <li><a href="popovers.html">Popovers</a>
-                                        </li>
-                                        <li><a href="tooltips.html">Tooltips</a>
-                                        </li>
-                                        <li><a href="dropdown.html">Dropdowns</a>
-                                        </li>
+                                        
                                     </ul>
                                 </li>
-                                <li><a data-toggle="collapse" data-target="#Pagemob" href="#">Pages</a>
-                                    <ul id="Pagemob" class="collapse dropdown-header-top">
-                                        <li><a href="contact.html">Contact</a>
-                                        </li>
-                                        <li><a href="invoice.html">Invoice</a>
-                                        </li>
-                                        <li><a href="typography.html">Typography</a>
-                                        </li>
-                                        <li><a href="color.html">Color</a>
-                                        </li>
-                                        <li><a href="login-register.html">Login Register</a>
-                                        </li>
-                                        <li><a href="404.html">404 Page</a>
-                                        </li>
-                                    </ul>
-                                </li>
+                             
                             </ul>
                         </nav>
                     </div>
@@ -455,19 +425,19 @@
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                         <li class="active"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
                         </li>
-                        <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Email</a>
+                        <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Funcionários</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Interface</a>
+                        <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Clientes</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Charts</a>
+                        <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Fornecedores</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Tables</a>
+                        <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Produtos</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Forms</a>
+                        <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Compras</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> App views</a>
+                        <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Vendas</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Page"><i class="notika-icon notika-support"></i> Pages</a>
+                       
                         </li>
                     </ul>
                     <div class="tab-content custom-menu-content">
@@ -480,100 +450,51 @@
                         </div>
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="inbox.html">Inbox</a>
-                                </li>
-                                <li><a href="view-email.html">View Email</a>
-                                </li>
-                                <li><a href="compose-email.html">Compose Email</a>
-                                </li>
+                                <li><a href="/funcionarios">Lista</a></li>
+                                <li><a href="/funcionarios/novo">Novo</a></li>
                             </ul>
                         </div>
                         <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="animations.html">Animations</a>
-                                </li>
-                                <li><a href="google-map.html">Google Map</a>
-                                </li>
-                                <li><a href="data-map.html">Data Maps</a>
-                                </li>
-                                <li><a href="code-editor.html">Code Editor</a>
-                                </li>
-                                <li><a href="image-cropper.html">Images Cropper</a>
-                                </li>
-                                <li><a href="wizard.html">Wizard</a>
-                                </li>
+                                <li><a href="/clientes">Lista</a></li>
+                                <li><a href="/clientes/novo">Novo</a></li>
+                                <li><a href="/clientes/favoritos">Favoritos</a></li>
                             </ul>
                         </div>
                         <div id="Charts" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="flot-charts.html">Flot Charts</a>
-                                </li>
-                                <li><a href="bar-charts.html">Bar Charts</a>
-                                </li>
-                                <li><a href="line-charts.html">Line Charts</a>
-                                </li>
-                                <li><a href="area-charts.html">Area Charts</a>
-                                </li>
+                                <li><a href="/fornecedores">Lista</a></li>
+                                <li><a href="/fornecedores/novo">Novo</a></li>
+                                <li><a href="/fornecedores/descatados">Destacados</a></li>
                             </ul>
                         </div>
                         <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="normal-table.html">Normal Table</a>
-                                </li>
-                                <li><a href="data-table.html">Data Table</a>
-                                </li>
+                                <li><a href="/produtos">Lista</a></li>
+                                <li><a href="/produtos/novo">Novo</a></li>
+                                <li><a href="/produtos/escassos">Escaços</a></li>
+                                <li><a href="/produtos/stoque">Stoque</a></li>
+                                <li><a href="/produtos/validade">Fora de Validade</a></li>
+                                <li><a href="/produtos/inventario">Inventário</a></li>
                             </ul>
                         </div>
                         <div id="Forms" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="form-elements.html">Form Elements</a>
-                                </li>
-                                <li><a href="form-components.html">Form Components</a>
-                                </li>
-                                <li><a href="form-examples.html">Form Examples</a>
-                                </li>
+                                <li><a href="/compras">Lista</a></li>
+                                <li><a href="/compras/novo">Nova</a></li>
                             </ul>
                         </div>
                         <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
-                                <li><a href="notification.html">Notifications</a>
+                                <li><a href="/vendas">Lista</a>
                                 </li>
-                                <li><a href="alert.html">Alerts</a>
+                                <li><a href="/vendas/novo">Nova</a>
                                 </li>
-                                <li><a href="modals.html">Modals</a>
-                                </li>
-                                <li><a href="buttons.html">Buttons</a>
-                                </li>
-                                <li><a href="tabs.html">Tabs</a>
-                                </li>
-                                <li><a href="accordion.html">Accordion</a>
-                                </li>
-                                <li><a href="dialog.html">Dialogs</a>
-                                </li>
-                                <li><a href="popovers.html">Popovers</a>
-                                </li>
-                                <li><a href="tooltips.html">Tooltips</a>
-                                </li>
-                                <li><a href="dropdown.html">Dropdowns</a>
+                                <li><a href="/vendas/estado">Estado</a>
                                 </li>
                             </ul>
                         </div>
-                        <div id="Page" class="tab-pane notika-tab-menu-bg animated flipInX">
-                            <ul class="notika-main-menu-dropdown">
-                                <li><a href="contact.html">Contact</a>
-                                </li>
-                                <li><a href="invoice.html">Invoice</a>
-                                </li>
-                                <li><a href="typography.html">Typography</a>
-                                </li>
-                                <li><a href="color.html">Color</a>
-                                </li>
-                                <li><a href="login-register.html">Login Register</a>
-                                </li>
-                                <li><a href="404.html">404 Page</a>
-                                </li>
-                            </ul>
-                        </div>
+                       
                     </div>
                 </div>
             </div>
