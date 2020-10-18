@@ -20,6 +20,8 @@ class DatabaseSeeder extends Seeder
             PessoaSeedeer::class,
             FuncionarioSeedeer::class,
             UsuarioSeedeer::class,
+            TipoProdutoSeedeer::class,
+            ClasseProdutoSeedeer::class,
         ]);
        
     }
