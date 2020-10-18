@@ -84,5 +84,12 @@ class UserController extends Controller
 
     public function loginForm()
     {
+        $data = [
+          'title'=>"ACESSO RESTRITO",
+          'menu'=>"Login",
+          'submenu'=>"",
+          'type'=>"login"  
+        ];
+        return view("user.login", $data);
     }
 }
