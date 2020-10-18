@@ -23,7 +23,7 @@ class CreateNotaVendasTable extends Migration
             $table->timestamps();
         });
 
-        Schema::table('', function (Blueprint $table) {
+        Schema::table('nota_vendas', function (Blueprint $table) {
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onUpdate('cascade');
         });
     }
