@@ -23,7 +23,14 @@ class VendaController extends Controller
      */
     public function create()
     {
-        //
+        $data = [
+            'title' => "Vendas",
+            'menu' => "Vendas",
+            'submenu' => "Novo",
+            'type' => "form"
+        ];
+
+        return view("venda.new", $data);
     }
 
     /**

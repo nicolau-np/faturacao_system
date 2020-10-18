@@ -423,7 +423,7 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li class="active"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
+                        <li class="@if($menu=='Home') active @endif"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
                         </li>
                         <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Funcionários</a>
                         </li>
@@ -435,13 +435,13 @@
                         </li>
                         <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Compras</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Vendas</a>
+                        <li class="@if($menu=='Vendas') active @endif"><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Vendas</a>
                         </li>
                        
                         </li>
                     </ul>
                     <div class="tab-content custom-menu-content">
-                        <div id="Home" class="tab-pane in active notika-tab-menu-bg animated flipInX">
+                        <div id="Home" class="tab-pane @if($menu=='Home') in active @endif notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/">Estado Actual</a>
                                 </li>
@@ -484,7 +484,7 @@
                                 <li><a href="/compras/novo">Nova</a></li>
                             </ul>
                         </div>
-                        <div id="Appviews" class="tab-pane notika-tab-menu-bg animated flipInX">
+                        <div id="Appviews" class="tab-pane @if($menu=='Vendas') in active @endif notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/vendas">Lista</a>
                                 </li>
