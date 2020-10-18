@@ -14,7 +14,9 @@ class CreateClasseProdutosTable extends Migration
     public function up()
     {
         Schema::create('classe_produtos', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->string('classe')->unique();
             $table->timestamps();
         });
     }
