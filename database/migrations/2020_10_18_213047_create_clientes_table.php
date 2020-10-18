@@ -14,8 +14,14 @@ class CreateClientesTable extends Migration
     public function up()
     {
         Schema::create('clientes', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_pessoa')->unsigned()->index();
             $table->timestamps();
+        });
+
+        Schema::table('clientes', function (Blueprint $table) {
+            $table->foreign('id_pessoa')->references('id')->on('pessoas')->onUpdate('cascade');
         });
     }
 

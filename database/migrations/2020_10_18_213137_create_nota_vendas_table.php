@@ -14,8 +14,17 @@ class CreateNotaVendasTable extends Migration
     public function up()
     {
         Schema::create('nota_vendas', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_usuario')->unsigned()->index();
+            $table->decimal('valor_total', 10, 4);
+            $table->decimal('desconto', 10, 4);
+            $table->decimal('valor_pago', 10, 4);
             $table->timestamps();
+        });
+
+        Schema::table('', function (Blueprint $table) {
+            $table->foreign('id_usuario')->references('id')->on('usuarios')->onUpdate('cascade');
         });
     }
 

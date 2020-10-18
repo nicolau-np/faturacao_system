@@ -14,8 +14,20 @@ class CreateItemComprasTable extends Migration
     public function up()
     {
         Schema::create('item_compras', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_usuario')->unsigned()->index();
+            $table->bigInteger('id_produto')->unsigned()->index();
+            $table->bigInteger('id_nota_compra')->unsigned()->index();
+            $table->bigInteger('quantidade');
+            $table->decimal('valor', 10,4);
             $table->timestamps();
+        });
+
+        Schema::table('item_compras', function (Blueprint $table) {
+            $table->foreign('id_usuario')->references('id')->on('usuarios')->onUpdate('cascade');
+            $table->foreign('id_produto')->references('id')->on('produtos')->onUpdate('cascade');
+            $table->foreign('id_nota_compra')->references('id')->on('nota_compras')->onUpdate('cascade');
         });
     }
 

@@ -14,8 +14,18 @@ class CreateFornecedorsTable extends Migration
     public function up()
     {
         Schema::create('fornecedors', function (Blueprint $table) {
-            $table->id();
+            $table->engine = "InnoDB";
+            $table->bigIncrements('id');
+            $table->bigInteger('id_municipio')->unsigned()->index();
+            $table->string('entidade')->unique();
+            $table->text('descricao')->nullable();
+            $table->bigInteger('telefone');
+            $table->string('endereco');
             $table->timestamps();
+        });
+
+        Schema::table('fornecedors', function (Blueprint $table) {
+            $table->foreign('id_municipio')->references('id')->on('municipios')->onUpdate('cascade');
         });
     }
 
