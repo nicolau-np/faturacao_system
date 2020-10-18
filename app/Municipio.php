@@ -21,4 +21,8 @@ class Municipio extends Model
         return $this->hasMany(Pessoa::class, 'id_municipio', 'id');
     }
 
+    public function fornecedor(){
+        return $this->hasMany(Fornecedor::class, 'id_municipio', 'id');
+    }
+
 }
