@@ -23,7 +23,7 @@ class CreateProdutosTable extends Migration
             $table->decimal('valor_compra', 10,2);
             $table->decimal('valor_venda', 10,2);
             $table->date('data_caducidade')->nullable();
-            $table->bigInteger('quantidade');
+            $table->bigInteger('quantidade')->nullable();
             $table->text('codigo_barra')->nullable();
             $table->text('codigo_qr')->nullable();
             $table->timestamps();

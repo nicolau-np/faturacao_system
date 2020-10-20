@@ -14,7 +14,8 @@ class NotaCompra extends Model
         'data_emissao',
         'data_vencimento',
         'desconto',
-        'valor_pago'
+        'valor_pago',
+        'status'
     ];
 
     public function usuario(){

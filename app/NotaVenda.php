@@ -12,15 +12,18 @@ class NotaVenda extends Model
     protected $fillable = [
         'id_usuario',
         'valor_total',
-        'desconto', 
-        'valor_pago'
+        'desconto',
+        'valor_pago',
+        'status'
     ];
 
-    public function item_venda(){
+    public function item_venda()
+    {
         return $this->hasMany(ItemVenda::class, 'id_nota_venda', 'id');
     }
 
-    public function usuario(){
+    public function usuario()
+    {
         return $this->belongsTo(User::class, 'id_usuario', 'id');
     }
 }

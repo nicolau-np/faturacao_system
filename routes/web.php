@@ -38,6 +38,7 @@ Route::group(['prefix' => '/fornecedores', 'middleware' => 'auth'], function () 
 Route::group(['prefix' => '/produtos', 'middleware' => 'auth'], function () {
     Route::get('/', "ProdutoController@index");
     Route::get('/novo', "ProdutoController@create");
+    Route::post('/store', "ProdutoController@store");
 });
 
 Route::group(['prefix' => '/compras', 'middleware' => 'auth'], function () {
@@ -49,3 +50,6 @@ Route::group(['prefix' => '/vendas', 'middleware' => 'auth'], function () {
     Route::get('/', "VendaController@index");
     Route::get('/novo', "VendaController@create");
 });
+
+
+Route::get('/grafico', "GraficoController@grafico");

@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\ClasseProduto;
+use App\Produto;
+use App\TipoProduto;
 use Illuminate\Http\Request;
 
 class ProdutoController extends Controller
@@ -23,7 +26,19 @@ class ProdutoController extends Controller
      */
     public function create()
     {
-        //
+        $classe_produto = ClasseProduto::pluck('classe', 'id');
+        $tipo_produto = TipoProduto::pluck('tipo', 'id');
+        $data = [
+            'title' => "Produtos",
+            'menu' => "Produtos",
+            'submenu' => "Novo",
+            'type' => "form",
+            'getClasseProduto' => $classe_produto,
+            'getTipoProduto' => $tipo_produto
+
+        ];
+
+        return view("produto.new", $data);
     }
 
     /**
@@ -34,7 +49,14 @@ class ProdutoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_classe_produto' => ['required', 'Integer'],
+            'id_tipo' => ['required', 'Integer'],
+            'nome' => ['required', 'string', 'min:4', 'max:70'],
+            'valor_compra' => ['required', 'numeric'],
+            'valor_venda' => ['required', 'numeric'],
+
+        ]);
     }
 
     /**

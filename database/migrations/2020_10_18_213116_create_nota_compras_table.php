@@ -22,6 +22,7 @@ class CreateNotaComprasTable extends Migration
             $table->date('data_vencimento');
             $table->decimal('desconto', 10,2);
             $table->decimal('valor_pago', 10,2);
+            $table->string('status')->nullable();
             $table->timestamps();
         });
 
