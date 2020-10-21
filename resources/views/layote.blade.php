@@ -431,7 +431,7 @@
                         </li>
                         <li><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Fornecedores</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Produtos</a>
+                        <li><a class="@if($menu=='Produtos') active @endif" data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Produtos</a>
                         </li>
                         <li><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Compras</a>
                         </li>
@@ -468,7 +468,7 @@
                                 <li><a href="/fornecedores/descatados">Destacados</a></li>
                             </ul>
                         </div>
-                        <div id="Tables" class="tab-pane notika-tab-menu-bg animated flipInX">
+                        <div id="Tables" class="tab-pane @if($menu=='Produtos') in active @endif notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/produtos">Lista</a></li>
                                 <li><a href="/produtos/novo">Novo</a></li>

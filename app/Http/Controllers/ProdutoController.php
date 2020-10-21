@@ -16,7 +16,17 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        //
+        $produtos = Produto::paginate(5);
+        $data = [
+            'title' => "Produtos",
+            'menu' => "Produtos",
+            'submenu' => "Listar",
+            'type' => "form",
+            'getProdutos' => $produtos,
+
+        ];
+
+        return view("produto.list", $data);
     }
 
     /**
@@ -52,11 +62,15 @@ class ProdutoController extends Controller
         $request->validate([
             'id_classe_produto' => ['required', 'Integer'],
             'id_tipo' => ['required', 'Integer'],
-            'nome' => ['required', 'string', 'min:4', 'max:70'],
+            'nome' => ['required', 'string', 'min:4', 'max:70', 'unique:produtos,nome'],
             'valor_compra' => ['required', 'numeric'],
             'valor_venda' => ['required', 'numeric'],
 
         ]);
+
+        if (Produto::create($request->except('_token'))) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     /**
