@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\NotaVenda;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -13,7 +15,6 @@ class HomeController extends Controller
      */
     public function __construct()
     {
-        
     }
 
     /**
@@ -23,13 +24,21 @@ class HomeController extends Controller
      */
     public function index()
     {
+        $data['nota_venda'] = [
+            'status' => "processo",
+            'id_usuario' => Auth::user()->id
+        ];
+
+        $carrinho = NotaVenda::where($data['nota_venda'])->get();
+
         $data = [
-            'title'=>"Sistema de Facturção",
-            'menu'=>"Home",
-            'submenu'=>"",
-            'type'=>"home"  
-          ];
-          
+            'title' => "Sistema de Facturção",
+            'menu' => "Home",
+            'submenu' => "",
+            'type' => "home",
+            'getNotaVenda' => $carrinho
+        ];
+
         return view("home", $data);
     }
 }

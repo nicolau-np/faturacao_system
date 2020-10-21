@@ -13,27 +13,29 @@ class Produto extends Model
         'id_tipo',
         'nome',
         'descricao',
-        'valor_compra',
-        'valor_venda',
         'data_caducidade',
         'quantidade',
         'codigo_barra',
         'codigo_qr'
     ];
 
-    public function classe_produto(){
+    public function classe_produto()
+    {
         return $this->belongsTo(ClasseProduto::class, 'id_classe_produto', 'id');
     }
 
-    public function tipo_produto(){
+    public function tipo_produto()
+    {
         return $this->belongsTo(TipoProduto::class, 'id_tipo', 'id');
     }
 
-    public function item_compra(){
+    public function item_compra()
+    {
         return $this->hasMany(ItemCompra::class, 'id_produto', 'id');
     }
 
-    public function item_venda(){
+    public function item_venda()
+    {
         return $this->hasMany(ItemVenda::class, 'id_produto', 'id');
     }
 }

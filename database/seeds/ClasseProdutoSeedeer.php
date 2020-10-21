@@ -13,6 +13,7 @@ class ClasseProdutoSeedeer extends Seeder
         "Bebidas Alcoolicas",
         "Bebidas Não Alcoolicas",
         "Água",
+        "Outro"
     ];
 
     public function run()

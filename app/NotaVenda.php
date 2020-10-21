@@ -13,7 +13,6 @@ class NotaVenda extends Model
         'id_usuario',
         'valor_total',
         'desconto',
-        'valor_pago',
         'status'
     ];
 

@@ -17,10 +17,9 @@ class CreateNotaVendasTable extends Migration
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
             $table->bigInteger('id_usuario')->unsigned()->index();
-            $table->decimal('valor_total', 10, 4);
-            $table->decimal('desconto', 10, 4);
-            $table->decimal('valor_pago', 10, 4);
-            $table->string('status')->nullable();
+            $table->decimal('valor_total', 10, 4)->nullable();
+            $table->decimal('desconto', 10, 4)->nullable();
+            $table->string('status');
             $table->timestamps();
         });
 

@@ -20,8 +20,6 @@ class CreateProdutosTable extends Migration
             $table->bigInteger('id_tipo')->unsigned()->index();
             $table->string('nome')->unique();
             $table->text('descricao')->nullable();
-            $table->decimal('valor_compra', 10,2);
-            $table->decimal('valor_venda', 10,2);
             $table->date('data_caducidade')->nullable();
             $table->bigInteger('quantidade')->nullable();
             $table->text('codigo_barra')->nullable();

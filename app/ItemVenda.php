@@ -13,6 +13,8 @@ class ItemVenda extends Model
         'id_usuario',
         'id_produto',
         'quantidade',
+        'valor_compra',
+        'valor_venda',
         'valor'
     ];
 

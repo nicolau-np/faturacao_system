@@ -19,9 +19,8 @@ class CreateNotaComprasTable extends Migration
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->decimal('valor_total', 10,2);
             $table->date('data_emissao');
-            $table->date('data_vencimento');
-            $table->decimal('desconto', 10,2);
-            $table->decimal('valor_pago', 10,2);
+            $table->date('data_vencimento')->nullable();
+            $table->decimal('desconto', 10,2)->nullable();
             $table->string('status')->nullable();
             $table->timestamps();
         });

@@ -13,18 +13,22 @@ class ItemCompra extends Model
         'id_produto',
         'id_nota_compra',
         'quantidade',
-        'valor'
+        'valor_compra',
+        'valor_venda'
     ];
 
-    public function usuario(){
+    public function usuario()
+    {
         return $this->belongsTo(User::class, 'id_usuario', 'id');
     }
 
-    public function produto(){
+    public function produto()
+    {
         return $this->belongsTo(Produto::class, 'id_produto', 'id');
     }
 
-    public function nota_compra(){
+    public function nota_compra()
+    {
         return $this->belongsTo(NotaCompra::class, 'id_nota_compra', 'id');
     }
 }

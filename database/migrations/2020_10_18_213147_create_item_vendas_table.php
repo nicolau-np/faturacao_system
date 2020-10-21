@@ -20,7 +20,9 @@ class CreateItemVendasTable extends Migration
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->bigInteger('id_produto')->unsigned()->index();
             $table->bigInteger('quantidade');
-            $table->decimal('valor', 10,2);
+            $table->decimal('valor_compra', 10, 2);
+            $table->decimal('valor_venda', 10, 2);
+            $table->decimal('valor', 10, 2)->nullable();
             $table->timestamps();
         });
 

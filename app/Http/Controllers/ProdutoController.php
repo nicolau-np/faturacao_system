@@ -16,12 +16,12 @@ class ProdutoController extends Controller
      */
     public function index()
     {
-        $produtos = Produto::paginate(5);
+        $produtos = Produto::paginate(6);
         $data = [
             'title' => "Produtos",
             'menu' => "Produtos",
             'submenu' => "Listar",
-            'type' => "form",
+            'type' => "view",
             'getProdutos' => $produtos,
 
         ];
@@ -62,11 +62,15 @@ class ProdutoController extends Controller
         $request->validate([
             'id_classe_produto' => ['required', 'Integer'],
             'id_tipo' => ['required', 'Integer'],
-            'nome' => ['required', 'string', 'min:4', 'max:70', 'unique:produtos,nome'],
-            'valor_compra' => ['required', 'numeric'],
-            'valor_venda' => ['required', 'numeric'],
+            'nome' => ['required', 'string', 'min:3', 'max:70', 'unique:produtos,nome']
 
         ]);
+
+        if ($request->id_tipo == 1) {
+            $request->validate([
+                'data_caducidade' => ['required', 'date']
+            ]);
+        }
 
         if (Produto::create($request->except('_token'))) {
             return back()->with(['success' => "Feito com sucesso"]);
@@ -81,7 +85,21 @@ class ProdutoController extends Controller
      */
     public function show($id)
     {
-        //
+        $produto = Produto::find($id);
+        if (!$produto) {
+            return back()->with(['error' => "Não encontrou produto"]);
+        }
+
+        $data = [
+            'title' => "Produtos",
+            'menu' => "Produtos",
+            'submenu' => "Novo",
+            'type' => "show",
+            'getProduto' => $produto
+
+        ];
+
+        return view("produto.show", $data);
     }
 
     /**
@@ -92,7 +110,24 @@ class ProdutoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $produto = Produto::find($id);
+        if (!$produto) {
+            return back()->with(['error' => "Não encontrou produto"]);
+        }
+        $classe_produto = ClasseProduto::pluck('classe', 'id');
+        $tipo_produto = TipoProduto::pluck('tipo', 'id');
+        $data = [
+            'title' => "Produtos",
+            'menu' => "Produtos",
+            'submenu' => "Novo",
+            'type' => "form",
+            'getClasseProduto' => $classe_produto,
+            'getTipoProduto' => $tipo_produto,
+            'getProduto' => $produto
+
+        ];
+
+        return view("produto.edit", $data);
     }
 
     /**
@@ -104,7 +139,27 @@ class ProdutoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $produto = Produto::find($id);
+        if (!$produto) {
+            return back()->with(['error' => "Não encontrou produto"]);
+        }
+
+        $request->validate([
+            'id_classe_produto' => ['required', 'Integer'],
+            'id_tipo' => ['required', 'Integer'],
+            'nome' => ['required', 'string', 'min:3', 'max:70']
+
+        ]);
+
+        if ($request->id_tipo == 1) {
+            $request->validate([
+                'data_caducidade' => ['required', 'date']
+            ]);
+        }
+
+        if (Produto::find($id)->update($request->except('_token'))) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     /**

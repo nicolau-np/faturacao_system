@@ -39,6 +39,9 @@ Route::group(['prefix' => '/produtos', 'middleware' => 'auth'], function () {
     Route::get('/', "ProdutoController@index");
     Route::get('/novo', "ProdutoController@create");
     Route::post('/store', "ProdutoController@store");
+    Route::get('/edit/{id_produto}', "ProdutoController@edit");
+    Route::put('/update/{id_produto}', "ProdutoController@update");
+    Route::get('/show/{id_produto}', "ProdutoController@show");
 });
 
 Route::group(['prefix' => '/compras', 'middleware' => 'auth'], function () {
@@ -49,6 +52,10 @@ Route::group(['prefix' => '/compras', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => '/vendas', 'middleware' => 'auth'], function () {
     Route::get('/', "VendaController@index");
     Route::get('/novo', "VendaController@create");
+});
+
+Route::group(['prefix' => '/notas_venda'], function () {
+    Route::get('/store', "NotaVendaController@store");
 });
 
 

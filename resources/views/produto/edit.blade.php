@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    {{Form::open(['method'=>"post", 'name'=>"form_produto", 'url'=>"/produtos/store"])}}
+                    {{Form::open(['method'=>"put", 'name'=>"form_produto", 'url'=>"/produtos/update/{$getProduto->id}"])}}
                     {{csrf_field()}}
 					@if(session('error'))
 					<div class="alert alert-danger">{{session('error')}}</div>
@@ -52,7 +52,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                  
-                                        {{Form::text('nome', null, ['class'=>"form-control", 'placeholder'=>"Nome do Produto"])}}
+                                        {{Form::text('nome', $getProduto->nome, ['class'=>"form-control", 'placeholder'=>"Nome do Produto"])}}
                                         @if($errors->has('nome'))
                                         <span class="text-danger">{{$errors->first('nome')}}</span>
                                         @endif
@@ -61,20 +61,36 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                  
-                                        {{Form::text('descricao', null, ['class'=>"form-control", 'placeholder'=>"Descrição"])}}
+                                        {{Form::text('descricao', $getProduto->descicao, ['class'=>"form-control", 'placeholder'=>"Descrição"])}}
                                         @if($errors->has('descricao'))
                                         <span class="text-danger">{{$errors->first('descricao')}}</span>
                                         @endif
                                 </div>
                             </div>
-                           
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                  
+                                        {{Form::number('valor_compra', $getProduto->valor_compra, ['class'=>"form-control", 'placeholder'=>"Valor de Compra"])}}
+                                        @if($errors->has('valor_compra'))
+                                        <span class="text-danger">{{$errors->first('valor_compra')}}</span>
+                                        @endif
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
-                        
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                  
+                                        {{Form::number('valor_venda', $getProduto->valor_venda, ['class'=>"form-control", 'placeholder'=>"Valor de Venda"])}}
+                                        @if($errors->has('valor_venda'))
+                                        <span class="text-danger">{{$errors->first('valor_venda')}}</span>
+                                        @endif
+                                </div>
+                            </div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     
-                                        {{Form::select('id_classe_produto', $getClasseProduto, null, ['class'=>"form-control", 'placeholder'=>"Classe do Produto"]) }}
+                                        {{Form::select('id_classe_produto', $getClasseProduto, $getProduto->id_classe_produto, ['class'=>"form-control", 'placeholder'=>"Classe do Produto"]) }}
                                         @if($errors->has('id_classe_produto'))
                                         <span class="text-danger">{{$errors->first('id_classe_produto')}}</span>
                                         @endif
@@ -83,7 +99,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     
-                                        {{Form::select('id_tipo', $getTipoProduto, null, ['class'=>"form-control", 'placeholder'=>"Tipo do Produto"]) }}
+                                        {{Form::select('id_tipo', $getTipoProduto, $getProduto->id_tipo, ['class'=>"form-control", 'placeholder'=>"Tipo do Produto"]) }}
                                         @if($errors->has('id_tipo'))
                                         <span class="text-danger">{{$errors->first('id_tipo')}}</span>
                                         @endif
@@ -97,7 +113,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                    
-                                        {{Form::date('data_caducidade', null, ['class'=>"form-control", 'placeholder'=>"Data de Caducidade"]) }}
+                                        {{Form::date('data_caducidade', $getProduto->data_caducidade, ['class'=>"form-control", 'placeholder'=>"Data de Caducidade"]) }}
                                         @if($errors->has('data_caducidade'))
                                         <span class="text-danger">{{$errors->first('data_caducidade')}}</span>
                                         @endif
@@ -106,7 +122,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     
-                                        {{Form::number('quantidade', null, ['class'=>"form-control", 'placeholder'=>"Quantidade"])}}
+                                        {{Form::number('quantidade', $getProduto->quantidade, ['class'=>"form-control", 'placeholder'=>"Quantidade"])}}
                                         @if($errors->has('quantidade'))
                                         <span class="text-danger">{{$errors->first('quantidade')}}</span>
                                         @endif
