@@ -67,26 +67,7 @@
                                         @endif
                                 </div>
                             </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                  
-                                        {{Form::number('valor_compra', $getProduto->valor_compra, ['class'=>"form-control", 'placeholder'=>"Valor de Compra"])}}
-                                        @if($errors->has('valor_compra'))
-                                        <span class="text-danger">{{$errors->first('valor_compra')}}</span>
-                                        @endif
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                  
-                                        {{Form::number('valor_venda', $getProduto->valor_venda, ['class'=>"form-control", 'placeholder'=>"Valor de Venda"])}}
-                                        @if($errors->has('valor_venda'))
-                                        <span class="text-danger">{{$errors->first('valor_venda')}}</span>
-                                        @endif
-                                </div>
-                            </div>
+                           
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     
@@ -96,6 +77,10 @@
                                         @endif
                                 </div>
                             </div>
+                        </div>
+                        <div class="row">
+                         
+                         
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                     

@@ -58,5 +58,6 @@ Route::group(['prefix' => '/notas_venda'], function () {
     Route::get('/store', "NotaVendaController@store");
 });
 
+Route::get('getMunicipio', );
 
 Route::get('/grafico', "GraficoController@grafico");

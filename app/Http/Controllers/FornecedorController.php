@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Provincia;
 use Illuminate\Http\Request;
 
 class FornecedorController extends Controller
@@ -23,7 +24,18 @@ class FornecedorController extends Controller
      */
     public function create()
     {
-        //
+$provincias = Provincia::pluck('provincia', 'id');
+
+        $data = [
+            'title' => "Fornecedores",
+            'menu' => "Fornecedores",
+            'submenu' => "Novo",
+            'type' => "form",
+            'getProvincias'=>$provincias
+
+        ];
+
+        return view("fornecedor.new", $data);
     }
 
     /**
