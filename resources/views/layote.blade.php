@@ -61,7 +61,7 @@
     <!-- modernizr JS
 		============================================ -->
     <script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
-
+    <script src="{{asset('assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
 </head>
 
 <body>
@@ -493,7 +493,7 @@
     @endif    
 
 
-    <script src="{{asset('assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
+   
     <!-- bootstrap JS
 		============================================ -->
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>

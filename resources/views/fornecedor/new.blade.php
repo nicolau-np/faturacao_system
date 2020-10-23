@@ -131,10 +131,10 @@
         $('.provincia').change(function (e) { 
             e.preventDefault();
             var data = {
-                'id_provincia': $(this).val()
+                id: $(this).val()
             };
             $.ajax({
-                type: "get",
+                type: "post",
                 url: "{{route('getMunicipio')}}",
                 data: data,
                 dataType: "html",
@@ -143,6 +143,7 @@
                 },
                 success: function (response) {
                     $('.municipio').html(response);
+                    //console.log(response);
                 }
             });
         });

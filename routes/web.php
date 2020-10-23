@@ -58,6 +58,6 @@ Route::group(['prefix' => '/notas_venda'], function () {
     Route::get('/store', "NotaVendaController@store");
 });
 
-Route::get('getMunicipio', );
+Route::post('getMunicipio', "MunicipioController@getMunicipio")->middleware('auth')->name('getMunicipio');
 
 Route::get('/grafico', "GraficoController@grafico");
