@@ -16,7 +16,11 @@ class Fornecedor extends Model
         'endereco'
     ];
 
-    public function muncipio(){
+    public function municipio(){
         return $this->belongsTo(Municipio::class, 'id_municipio', 'id');
+    }
+
+    public function nota_compra(){
+        return $this->hasMany(NotaCompra::class, 'id_fornecedor', 'id');
     }
 }

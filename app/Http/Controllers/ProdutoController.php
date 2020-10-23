@@ -62,7 +62,7 @@ class ProdutoController extends Controller
         $request->validate([
             'id_classe_produto' => ['required', 'Integer'],
             'id_tipo' => ['required', 'Integer'],
-            'nome' => ['required', 'string', 'min:3', 'max:70', 'unique:produtos,nome']
+            'nome' => ['required', 'string', 'min:3', 'max:70', 'unique:produtos,nome,except,id']
 
         ]);
 

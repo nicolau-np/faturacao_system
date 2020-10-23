@@ -33,6 +33,10 @@ Route::group(['prefix' => '/clientes', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => '/fornecedores', 'middleware' => 'auth'], function () {
     Route::get('/', "FornecedorController@index");
     Route::get('/novo', "FornecedorController@create");
+    Route::post('/store', "FornecedorController@store");
+    Route::get('/edit/{id_fornecedor}', "FornecedorController@edit");
+    Route::put('/update/{id_fornecedor}', "FornecedorController@update");
+    Route::get('/show/{id_fornecedor}', "FornecedorController@show");
 });
 
 Route::group(['prefix' => '/produtos', 'middleware' => 'auth'], function () {

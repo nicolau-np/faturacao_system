@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Fornecedor;
 use App\Provincia;
 use Illuminate\Http\Request;
+
+use function PHPSTORM_META\map;
 
 class FornecedorController extends Controller
 {
@@ -14,7 +17,18 @@ class FornecedorController extends Controller
      */
     public function index()
     {
-        //
+        $fornecedores = Fornecedor::paginate(5);
+
+        $data = [
+            'title' => "Fornecedores",
+            'menu' => "Fornecedores",
+            'submenu' => "Listar",
+            'type' => "view",
+            'getFornecedores' => $fornecedores
+
+        ];
+
+        return view("fornecedor.list", $data);
     }
 
     /**
@@ -24,14 +38,14 @@ class FornecedorController extends Controller
      */
     public function create()
     {
-$provincias = Provincia::pluck('provincia', 'id');
+        $provincias = Provincia::pluck('provincia', 'id');
 
         $data = [
             'title' => "Fornecedores",
             'menu' => "Fornecedores",
             'submenu' => "Novo",
             'type' => "form",
-            'getProvincias'=>$provincias
+            'getProvincias' => $provincias
 
         ];
 
@@ -46,7 +60,16 @@ $provincias = Provincia::pluck('provincia', 'id');
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_municipio' => ['required', 'Integer'],
+            'entidade' => ['required', 'string', 'min:3', 'max:255', 'unique:fornecedors,entidade,except,id'],
+            'telefone' => ['required', 'Integer'],
+            'endereco' => ['required', 'string', 'min:9', 'max:255'],
+        ]);
+
+        if (Fornecedor::create($request->except('_token'))) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     /**
@@ -57,7 +80,22 @@ $provincias = Provincia::pluck('provincia', 'id');
      */
     public function show($id)
     {
-        //
+        $fornecedor = Fornecedor::find($id);
+        if (!$fornecedor) {
+            return back()->with(['error' => "Não encontrou o fornecedor"]);
+        }
+
+
+        $data = [
+            'title' => "Fornecedores",
+            'menu' => "Fornecedores",
+            'submenu' => "Novo",
+            'type' => "form",
+            'getFornecedor' => $fornecedor
+
+        ];
+
+        return view("fornecedor.show", $data);
     }
 
     /**
@@ -68,7 +106,24 @@ $provincias = Provincia::pluck('provincia', 'id');
      */
     public function edit($id)
     {
-        //
+        $fornecedor = Fornecedor::find($id);
+        if (!$fornecedor) {
+            return back()->with(['error' => "Não encontrou o fornecedor"]);
+        }
+
+        $provincias = Provincia::pluck('provincia', 'id');
+
+        $data = [
+            'title' => "Fornecedores",
+            'menu' => "Fornecedores",
+            'submenu' => "Novo",
+            'type' => "form",
+            'getProvincias' => $provincias,
+            'getFornecedor' => $fornecedor
+
+        ];
+
+        return view("fornecedor.edit", $data);
     }
 
     /**
@@ -80,7 +135,21 @@ $provincias = Provincia::pluck('provincia', 'id');
      */
     public function update(Request $request, $id)
     {
-        //
+        $fornecedor = Fornecedor::find($id);
+        if (!$fornecedor) {
+            return back()->with(['error' => "Não encontrou o fornecedor"]);
+        }
+        
+        $request->validate([
+            'id_municipio' => ['required', 'Integer'],
+            'entidade' => ['required', 'string', 'min:3', 'max:255'],
+            'telefone' => ['required', 'Integer'],
+            'endereco' => ['required', 'string', 'min:9', 'max:255'],
+        ]);
+
+        if (Fornecedor::find($id)->update($request->except('_token'))) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     /**

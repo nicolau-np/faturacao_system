@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Fornecedor;
+use App\NotaCompra;
 use Illuminate\Http\Request;
 
 class CompraController extends Controller
@@ -13,7 +15,18 @@ class CompraController extends Controller
      */
     public function index()
     {
-        //
+        $compras = NotaCompra::paginate(5);
+
+        $data = [
+            'title' => "Compras",
+            'menu' => "Compras",
+            'submenu' => "Listar",
+            'type' => "view",
+            'getCompras' => $compras
+
+        ];
+
+        return view("compra.list", $data);
     }
 
     /**
@@ -23,7 +36,17 @@ class CompraController extends Controller
      */
     public function create()
     {
-        //
+        $fornecedores = Fornecedor::pluck('entidade', 'id');
+        $data = [
+            'title' => "Compras",
+            'menu' => "Compras",
+            'submenu' => "Novo",
+            'type' => "form",
+            'getFornecedores' => $fornecedores
+
+        ];
+
+        return view("compra.new", $data);
     }
 
     /**

@@ -16,6 +16,7 @@ class CreateNotaComprasTable extends Migration
         Schema::create('nota_compras', function (Blueprint $table) {
             $table->engine = "InnoDB";
             $table->bigIncrements('id');
+            $table->bigInteger('id_fornecedor')->unsigned()->index();
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->decimal('valor_total', 10,2);
             $table->date('data_emissao');
@@ -27,6 +28,7 @@ class CreateNotaComprasTable extends Migration
 
         Schema::table('nota_compras', function (Blueprint $table) {
             $table->foreign('id_usuario')->references('id')->on('usuarios')->onUpdate('cascade');
+            $table->foreign('id_fornecedor')->references('id')->on('fornecedors')->onUpdate('cascade');
         });
     }
 

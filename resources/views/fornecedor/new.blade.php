@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    {{Form::open(['method'=>"post", 'name'=>"form_produto", 'url'=>"/fornecedores/store"])}}
+                    {{Form::open(['method'=>"post", 'name'=>"form_fornecedor", 'url'=>"/fornecedores/store"])}}
                     {{csrf_field()}}
 					@if(session('error'))
 					<div class="alert alert-danger">{{session('error')}}</div>
