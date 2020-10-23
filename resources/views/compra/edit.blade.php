@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    {{Form::open(['method'=>"post", 'name'=>"form_notaCompra", 'url'=>"/compras/store"])}}
+                    {{Form::open(['method'=>"put", 'name'=>"form_notaCompra", 'url'=>"/compras/update/{$getCompra->id}"])}}
                     {{csrf_field()}}
 					@if(session('error'))
 					<div class="alert alert-danger">{{session('error')}}</div>
@@ -53,7 +53,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                  
-                                       {{Form::select('id_fornecedor', $getFornecedores, null, ['class'=>"form-control", 'placeholder'=>"Fornecedor"]) }}
+                                       {{Form::select('id_fornecedor', $getFornecedores, $getCompra->id_fornecedor, ['class'=>"form-control", 'placeholder'=>"Fornecedor"]) }}
                                         @if($errors->has('id_fornecedor'))
                                         <span class="text-danger">{{$errors->first('id_fornecedor')}}</span>
                                         @endif
@@ -62,7 +62,7 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                    {{Form::date('data_emissao', null, ['class'=>"form-control", 'placeholder'=>"Data de Emissão"])}}
+                                    {{Form::date('data_emissao', $getCompra->data_emissao, ['class'=>"form-control", 'placeholder'=>"Data de Emissão"])}}
                                         @if($errors->has('data_emissao'))
                                         <span class="text-danger">{{$errors->first('data_emissao')}}</span>
                                         @endif
@@ -72,7 +72,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                  
-                                        {{Form::date('data_vencimento', null, ['class'=>"form-control", 'placeholder'=>"Data de Entrega"])}}
+                                        {{Form::date('data_vencimento', $getCompra->data_vencimento, ['class'=>"form-control", 'placeholder'=>"Data de Entrega"])}}
                                         @if($errors->has('data_vencimento'))
                                         <span class="text-danger">{{$errors->first('data_vencimento')}}</span>
                                         @endif
@@ -84,7 +84,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                    
-                                        {{Form::number('valor_total', null, ['class'=>"form-control", 'placeholder'=>"Valor Total"]) }}
+                                        {{Form::number('valor_total', $getCompra->valor_total, ['class'=>"form-control", 'placeholder'=>"Valor Total"]) }}
                                         @if($errors->has('valor_total'))
                                         <span class="text-danger">{{$errors->first('valor_total')}}</span>
                                         @endif
@@ -94,7 +94,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                    
-                                        {{Form::number('desconto', null, ['class'=>"form-control", 'placeholder'=>"Descontos"]) }}
+                                        {{Form::number('desconto', $getCompra->desconto, ['class'=>"form-control", 'placeholder'=>"Descontos"]) }}
                                         @if($errors->has('desconto'))
                                         <span class="text-danger">{{$errors->first('desconto')}}</span>
                                         @endif

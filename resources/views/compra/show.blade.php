@@ -15,7 +15,7 @@
 										<i class="notika-icon notika-edit"></i>
 									</div>
 									<div class="breadcomb-ctn">
-                                    <h2>{{$getProduto->nome}}</h2>
+                                    <h2>{{$getCompra->fornecedor->entidade}} - {{$getCompra->created_at}} </h2>
 										<p>Descriçao</p>
 									</div>
 								</div>
@@ -41,11 +41,7 @@
                         <div class="row">
                             <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
                                <div class="bigDescricao">
-                                 @if ($getProduto->descricao=="")
-                                     Nenhuma descrição para este produto
-                                @else
-                                {{$getProduto->descricao}}
-                                 @endif
+                                 {{$getCompra->data_emissao}}
                                  
                                </div>
                             </div>
@@ -53,13 +49,12 @@
                                 <div class="preview-img-pro-ad">
                                    <div class="descicao">
 
-                                   Nome do produto: {{$getProduto->nome}}<br/>
-                                   Tipo de Produto: {{$getProduto->tipo_produto->tipo}}<br/>
-                                   Classe do Produto: {{$getProduto->classe_produto->classe}}<br/>
-                                   Quantidade: {{$getProduto->quantidade}}<br/>
-                                    Data de Caducidade: {{date('d-m-Y', strtotime($getProduto->data_caducidade))}} <br/>
-                                   Valor de Compra: {{number_format($getProduto->item_compra->valor_compra,2,',','.')}}<br/>
-                                   Valor de Venda: {{number_format($getProduto->item_compra->valor_venda,2,',','.')}}<br/>
+                                   Fornecedor: {{$getCompra->fornecedor->entidade}}<br/>
+                                   Data de Emissão: {{date('d-m-Y', strtotime($getCompra->data_emissao))}}<br/>
+                                   Data de Entrega: {{date('d-m-Y', strtotime($getCompra->data_vencimento))}}<br/>
+                                   Valor Total: {{number_format($getCompra->valor_total,2,',','.')}}<br/>
+                                   Desconto: {{number_format($getCompra->desconto,2,',','.')}} <br/>
+                                   
                                    </div>
                                
                                 </div>

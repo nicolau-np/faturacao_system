@@ -46,12 +46,11 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Fornecedor</th>
                                         <th>Usuário</th>
                                         <th>Valor Total</th>
                                         <th>Data de Emissão</th>
-                                        <th>Data de Vencimento</th>
                                         <th>Descontos</th>
-                                        <th>Valor Pago</th>
                                         <th>Operações</th>
 
                                     </tr>
@@ -60,13 +59,13 @@
                                     @foreach ($getCompras as $compra)
                                        
                                     <tr>
+                                        <td>{{$compra->fornecedor->entidade}}</td>
                                     <td>{{$compra->usuario->pessoa->nome}}</td>
-                                        <td>{{$compra->valor_total}}</td>
-                                        <td>{{$compra->data_emissao}}</td>
-                                        <td>{{$compra->data_vencimento}}</td>
-                                        <td>{{$compra->desconto}}</td>
-                                        <td>{{$compra->valor_pago}}</td>
+                                        <td>{{number_format($compra->valor_total,2,',','.')}}</td>
+                                        <td>{{date('d-m-Y', strtotime($compra->data_emissao))}}</td>
+                                        <td>{{number_format($compra->desconto,2,',','.')}}</td>
                                         <td>
+                                            <a href="/compras/item_compra/{{$compra->id}}" class="btn btn-warning btn-sm">Add produtos</a>
                                             <a href="/compras/show/{{$compra->id}}" class="btn btn-success btn-sm">Ver mais</a>
                                             <a href="/compras/edit/{{$compra->id}}" class="btn btn-primary btn-sm">Editar</a>
                                             <a href="#" class="btn btn-danger btn-sm">Eliminar</a>

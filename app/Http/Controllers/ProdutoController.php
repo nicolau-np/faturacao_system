@@ -93,7 +93,7 @@ class ProdutoController extends Controller
         $data = [
             'title' => "Produtos",
             'menu' => "Produtos",
-            'submenu' => "Novo",
+            'submenu' => "Mostrar",
             'type' => "show",
             'getProduto' => $produto
 

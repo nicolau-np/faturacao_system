@@ -89,8 +89,8 @@ class FornecedorController extends Controller
         $data = [
             'title' => "Fornecedores",
             'menu' => "Fornecedores",
-            'submenu' => "Novo",
-            'type' => "form",
+            'submenu' => "Mostrar",
+            'type' => "show",
             'getFornecedor' => $fornecedor
 
         ];

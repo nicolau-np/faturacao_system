@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Fornecedor;
 use App\NotaCompra;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class CompraController extends Controller
 {
@@ -57,7 +58,25 @@ class CompraController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'id_fornecedor' => ['required', 'Integer'],
+            'valor_total' => ['required', 'numeric'],
+            'data_emissao' => ['required', 'date']
+        ]);
+
+        $data = [
+            'id_fornecedor' => $request->id_fornecedor,
+            'id_usuario' => Auth::user()->id,
+            'valor_total' => $request->valor_total,
+            'data_emissao' => $request->data_emissao,
+            'data_vencimento' => $request->data_vencimento,
+            'desconto' => $request->desconto,
+            'status' => "on"
+        ];
+
+        if (NotaCompra::create($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     /**
@@ -68,7 +87,21 @@ class CompraController extends Controller
      */
     public function show($id)
     {
-        //
+        $compra = NotaCompra::find($id);
+        if(!$compra){
+            return back()->with(['error'=>"Não encontrou compra"]);
+        }
+
+        $data = [
+            'title' => "Compras",
+            'menu' => "Compras",
+            'submenu' => "Mostrar",
+            'type' => "show",
+            'getCompra' => $compra
+
+        ];
+
+        return view("compra.show", $data);
     }
 
     /**
@@ -79,7 +112,23 @@ class CompraController extends Controller
      */
     public function edit($id)
     {
-        //
+         $compra = NotaCompra::find($id);
+        if(!$compra){
+            return back()->with(['error'=>"Não encontrou compra"]);
+        }
+
+        $fornecedores = Fornecedor::pluck('entidade', 'id');
+        $data = [
+            'title' => "Compras",
+            'menu' => "Compras",
+            'submenu' => "Novo",
+            'type' => "form",
+            'getFornecedores' => $fornecedores,
+            'getCompra' => $compra
+
+        ];
+
+        return view("compra.edit", $data);
     }
 
     /**
@@ -91,7 +140,28 @@ class CompraController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $compra = NotaCompra::find($id);
+        if(!$compra){
+            return back()->with(['error'=>"Não encontrou compra"]);
+        }
+        
+        $request->validate([
+            'id_fornecedor' => ['required', 'Integer'],
+            'valor_total' => ['required', 'numeric'],
+            'data_emissao' => ['required', 'date']
+        ]);
+
+        $data = [
+            'id_fornecedor' => $request->id_fornecedor,
+            'valor_total' => $request->valor_total,
+            'data_emissao' => $request->data_emissao,
+            'data_vencimento' => $request->data_vencimento,
+            'desconto' => $request->desconto
+        ];
+
+        if (NotaCompra::find($id)->update($data)) {
+            return back()->with(['success' => "Feito com sucesso"]);
+        }
     }
 
     /**
@@ -103,5 +173,10 @@ class CompraController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function add_produto()
+    {
+        echo "hello";
     }
 }
