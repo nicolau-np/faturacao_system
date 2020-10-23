@@ -172,4 +172,8 @@ class ProdutoController extends Controller
     {
         //
     }
+
+    public function getProduto(Request $request){
+        echo $request->produto;
+    }
 }

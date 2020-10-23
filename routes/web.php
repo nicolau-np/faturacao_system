@@ -68,5 +68,6 @@ Route::group(['prefix' => '/notas_venda'], function () {
 });
 
 Route::post('getMunicipio', "MunicipioController@getMunicipio")->middleware('auth')->name('getMunicipio');
+Route::post('getProduto', "ProdutoController@getProduto")->middleware('auth')->name('getProduto');
 
 Route::get('/grafico', "GraficoController@grafico");

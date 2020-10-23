@@ -58,8 +58,8 @@
                                    Classe do Produto: {{$getProduto->classe_produto->classe}}<br/>
                                    Quantidade: {{$getProduto->quantidade}}<br/>
                                     Data de Caducidade: {{date('d-m-Y', strtotime($getProduto->data_caducidade))}} <br/>
-                                   Valor de Compra: {{number_format($getProduto->item_compra->valor_compra,2,',','.')}}<br/>
-                                   Valor de Venda: {{number_format($getProduto->item_compra->valor_venda,2,',','.')}}<br/>
+                                   Valor de Compra: <br/>
+                                   Valor de Venda: <br/>
                                    </div>
                                
                                 </div>

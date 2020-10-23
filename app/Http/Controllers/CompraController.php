@@ -175,8 +175,20 @@ class CompraController extends Controller
         //
     }
 
-    public function add_produto()
+    public function add_produto($id_compra)
     {
-        echo "hello";
+        $compra = NotaCompra::find($id_compra);
+        if(!$compra){
+            return back()->with(['error'=>"Não encontrou compra"]);
+        }
+        $data = [
+            'title' => "Compras",
+            'menu' => "Compras",
+            'submenu' => "Adicionar Produto",
+            'type' => "form"
+
+        ];
+
+        return view("compra.add_produto", $data); 
     }
 }
