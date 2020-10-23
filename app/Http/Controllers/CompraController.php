@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Fornecedor;
+use App\ItemCompra;
 use App\NotaCompra;
+use App\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -88,8 +90,8 @@ class CompraController extends Controller
     public function show($id)
     {
         $compra = NotaCompra::find($id);
-        if(!$compra){
-            return back()->with(['error'=>"Não encontrou compra"]);
+        if (!$compra) {
+            return back()->with(['error' => "Não encontrou compra"]);
         }
 
         $data = [
@@ -112,9 +114,9 @@ class CompraController extends Controller
      */
     public function edit($id)
     {
-         $compra = NotaCompra::find($id);
-        if(!$compra){
-            return back()->with(['error'=>"Não encontrou compra"]);
+        $compra = NotaCompra::find($id);
+        if (!$compra) {
+            return back()->with(['error' => "Não encontrou compra"]);
         }
 
         $fornecedores = Fornecedor::pluck('entidade', 'id');
@@ -141,10 +143,10 @@ class CompraController extends Controller
     public function update(Request $request, $id)
     {
         $compra = NotaCompra::find($id);
-        if(!$compra){
-            return back()->with(['error'=>"Não encontrou compra"]);
+        if (!$compra) {
+            return back()->with(['error' => "Não encontrou compra"]);
         }
-        
+
         $request->validate([
             'id_fornecedor' => ['required', 'Integer'],
             'valor_total' => ['required', 'numeric'],
@@ -178,17 +180,73 @@ class CompraController extends Controller
     public function add_produto($id_compra)
     {
         $compra = NotaCompra::find($id_compra);
-        if(!$compra){
-            return back()->with(['error'=>"Não encontrou compra"]);
+        if (!$compra) {
+            return back()->with(['error' => "Não encontrou compra"]);
         }
         $data = [
             'title' => "Compras",
             'menu' => "Compras",
             'submenu' => "Adicionar Produto",
-            'type' => "form"
+            'type' => "form",
+            'getCompra' => $compra
 
         ];
 
-        return view("compra.add_produto", $data); 
+        return view("compra.add_produto", $data);
+    }
+
+    public function store_addProduto(Request $request, $id_compra)
+    {
+        $compra = NotaCompra::find($id_compra);
+        if (!$compra) {
+            return back()->with(['error' => "Não encontrou compra"]);
+        }
+        $request->validate([
+            'id_produto' => ['required', 'Integer'],
+            'id_nota_compra' => ['required', 'Integer'],
+            'quantidade' => ['required', 'Integer'],
+            'valor_compra' => ['required', 'numeric'],
+            'valor_venda' => ['required', 'numeric']
+        ]);
+
+        $data = [
+            'id_usuario' => Auth::user()->id,
+            'id_produto' => $request->id_produto,
+            'id_nota_compra' => $id_compra,
+            'quantidade' => $request->quantidade,
+            'valor_compra' => $request->valor_compra,
+            'valor_venda' => $request->valor_venda
+        ];
+
+        if (ItemCompra::where([
+            'id_produto' => $data['id_produto'],
+            'id_nota_compra' => $data['id_nota_compra']
+        ])) {
+            return back()->with(['error' => "Já cadastrou este produto nesta compra"]);
+        }
+
+        if (ItemCompra::create($data)) {
+            if (Produto::find($data['id_produto'])->increment('quantidade', $data['quantidade'])) {
+                return back()->with(['success' => "Feito com sucesso"]);
+            }
+        }
+    }
+
+    public function list_produtoCompra($id_compra)
+    {
+        $compra = NotaCompra::find($id_compra);
+        if (!$compra) {
+            return back()->with(['error' => "Não encontrou compra"]);
+        }
+        $item_compra = ItemCompra::orderBy('id', 'desc')->where('id_nota_compra', $id_compra)->paginate(5);
+        $data = [
+            'title' => "Compras",
+            'menu' => "Compras",
+            'submenu' => "Itens da Compra",
+            'type' => "view",
+            'getCompra' => $compra,
+            'getItemCompra' => $item_compra
+        ];
+        return view("compra.list_produtoCompra", $data);
     }
 }

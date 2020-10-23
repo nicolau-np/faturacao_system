@@ -15,8 +15,8 @@
 										<i class="notika-icon notika-windows"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Compras</h2>
-										<p>Lista de Compras</p>
+                                    <h2>Compra {{$getCompra->fornecedor->entidade}}</h2>
+										<p>Produtos da Compra</p>
 									</div>
 								</div>
 							</div>
@@ -48,27 +48,26 @@
                                     <tr>
                                         <th>Fornecedor</th>
                                         <th>Usuário</th>
-                                        <th>Valor Total</th>
-                                        <th>Data de Emissão</th>
-                                        <th>Descontos</th>
+                                        <th>Produto</th>
+                                        <th>Valor de Compra</th>
+                                        <th>Valor de Venda</th>
+                                        <th>Quantidade</th>
                                         <th>Operações</th>
 
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach ($getCompras as $compra)
+                                    @foreach ($getItemCompra as $itemCompra)
                                        
                                     <tr>
-                                        <td>{{$compra->fornecedor->entidade}}</td>
-                                    <td>{{$compra->usuario->pessoa->nome}}</td>
-                                        <td>{{number_format($compra->valor_total,2,',','.')}}</td>
-                                        <td>{{date('d-m-Y', strtotime($compra->data_emissao))}}</td>
-                                        <td>{{number_format($compra->desconto,2,',','.')}}</td>
+                                        <td>{{$itemCompra->nota_compra->fornecedor->entidade}}</td>
+                                    <td>{{$itemCompra->nota_compra->usuario->pessoa->nome}}</td>
+                                    <td>{{$itemCompra->produto->nome}}</td>
+                                        <td>{{number_format($itemCompra->valor_compra,2,',','.')}}</td>
+                                        <td>{{number_format($itemCompra->valor_venda,2,',','.')}}</td>
+                                        <td>{{$itemCompra->quantidade}}</td>
                                         <td>
-                                            <a href="/compras/item_compra/novo/{{$compra->id}}" class="btn btn-warning btn-sm">Add produtos</a>
-                                            <a href="/compras/item_compra/{{$compra->id}}" class="btn btn-info btn-sm">Ver produtos</a>
-                                            <a href="/compras/show/{{$compra->id}}" class="btn btn-success btn-sm">Ver mais</a>
-                                            <a href="/compras/edit/{{$compra->id}}" class="btn btn-primary btn-sm">Editar</a>
+                                            <a href="/compras/item_compra/edit/{{$itemCompra->id}}" class="btn btn-primary btn-sm">Editar</a>
                                             <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
                                         </td>
                                     </tr>
@@ -76,7 +75,7 @@
                                     @endforeach
                                          </tbody>
                             <div class="links">
-                                {{$getCompras->links()}}
+                                {{$getItemCompra->links()}}
                             </div>
                             </table>
                         </div>

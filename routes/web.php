@@ -55,7 +55,9 @@ Route::group(['prefix' => '/compras', 'middleware' => 'auth'], function () {
     Route::get('/edit/{id_compra}', "CompraController@edit");
     Route::put('/update/{id_compra}', "CompraController@update");
     Route::get('/show/{id_compra}', "CompraController@show");
-    Route::get('/item_compra/{id_compra}', "CompraController@add_produto");
+    Route::get('/item_compra/novo/{id_compra}', "CompraController@add_produto");
+    Route::put('/store_addProduto/{id_compra}', "CompraController@store_addProduto");
+    Route::get('/item_compra/{id_compra}', "CompraController@list_produtoCompra");
 });
 
 Route::group(['prefix' => '/vendas', 'middleware' => 'auth'], function () {

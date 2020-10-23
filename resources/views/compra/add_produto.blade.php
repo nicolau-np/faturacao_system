@@ -14,8 +14,8 @@
 										<i class="notika-icon notika-form"></i>
 									</div>
 									<div class="breadcomb-ctn">
-										<h2>Adicionar Produto</h2>
-										<p>Items da Compra</p>
+                                    <h2>{{$getCompra->fornecedor->entidade}}</h2>
+										<p>Adicionar Produto</p>
 									</div>
 								</div>
 							</div>
@@ -36,7 +36,7 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
-                    {{Form::open(['method'=>"post", 'name'=>"form_itemCompra", 'url'=>"/compras/store_addProduto"])}}
+                    {{Form::open(['method'=>"put", 'name'=>"form_itemCompra", 'url'=>"/compras/store_addProduto/{$getCompra->id}"])}}
                     {{csrf_field()}}
 					@if(session('error'))
 					<div class="alert alert-danger">{{session('error')}}</div>
@@ -59,26 +59,26 @@
                                         @endif
                                 </div>
                             </div>
-
-                            
-                            
+ 
                         </div>
                         <div class="row">
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12"></div>
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12 carregar_produtos">
                                 <input type="radio" name="id_produto" value="" />
-                              </div>
+                                @if($errors->has('id_produto'))
+                                        <span class="text-danger">{{$errors->first('id_produto')}}</span>
+                                @endif
+                            </div>
                         </div>
-                        <hr/>
-                        
+                        <br/>
                         <div class="row">
                        
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                    
-                                        {{Form::number('valor_total', null, ['class'=>"form-control", 'placeholder'=>"Valor Total"]) }}
-                                        @if($errors->has('valor_total'))
-                                        <span class="text-danger">{{$errors->first('valor_total')}}</span>
+                                        {{Form::number('valor_compra', null, ['class'=>"form-control", 'placeholder'=>"Valor de Compra"]) }}
+                                        @if($errors->has('valor_compra'))
+                                        <span class="text-danger">{{$errors->first('valor_compra')}}</span>
                                         @endif
                                 </div>
                             </div>
@@ -86,14 +86,22 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                    
-                                        {{Form::number('desconto', null, ['class'=>"form-control", 'placeholder'=>"Descontos"]) }}
-                                        @if($errors->has('desconto'))
-                                        <span class="text-danger">{{$errors->first('desconto')}}</span>
+                                        {{Form::number('valor_venda', null, ['class'=>"form-control", 'placeholder'=>"Valor de Venda"]) }}
+                                        @if($errors->has('valor_venda'))
+                                        <span class="text-danger">{{$errors->first('valor_venda')}}</span>
                                         @endif
                                 </div>
                             </div>
 
-                          
+                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                <div class="form-group">
+                                   
+                                        {{Form::number('quantidade', null, ['class'=>"form-control", 'placeholder'=>"Quantidade"]) }}
+                                        @if($errors->has('quantidade'))
+                                        <span class="text-danger">{{$errors->first('quantidade')}}</span>
+                                        @endif
+                                </div>
+                            </div>
                          
                         </div>
                    

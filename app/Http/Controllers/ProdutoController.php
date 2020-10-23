@@ -173,7 +173,14 @@ class ProdutoController extends Controller
         //
     }
 
-    public function getProduto(Request $request){
-        echo $request->produto;
+    public function getProduto(Request $request)
+    {
+        $produto = Produto::where('nome', 'LIKE', "%{$request->produto}%")->get();
+
+        $data = [
+            'getProduto' => $produto
+        ];
+
+        return view("ajax.getProduto", $data);
     }
 }
