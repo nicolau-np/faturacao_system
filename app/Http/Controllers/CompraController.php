@@ -203,7 +203,6 @@ class CompraController extends Controller
         }
         $request->validate([
             'id_produto' => ['required', 'Integer'],
-            'id_nota_compra' => ['required', 'Integer'],
             'quantidade' => ['required', 'Integer'],
             'valor_compra' => ['required', 'numeric'],
             'valor_venda' => ['required', 'numeric']
@@ -221,7 +220,7 @@ class CompraController extends Controller
         if (ItemCompra::where([
             'id_produto' => $data['id_produto'],
             'id_nota_compra' => $data['id_nota_compra']
-        ])) {
+        ])->first()) {
             return back()->with(['error' => "Já cadastrou este produto nesta compra"]);
         }
 
