@@ -19,8 +19,8 @@ class CreateItemComprasTable extends Migration
             $table->bigInteger('id_usuario')->unsigned()->index();
             $table->bigInteger('id_produto')->unsigned()->index();
             $table->bigInteger('id_nota_compra')->unsigned()->index();
-            $table->decimal('valor_compra', 10, 4);
-            $table->decimal('valor_venda', 10, 4);
+            $table->decimal('valor_compra', 10, 2);
+            $table->decimal('valor_venda', 10, 2);
             $table->bigInteger('quantidade');
 
             $table->timestamps();

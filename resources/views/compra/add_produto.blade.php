@@ -93,12 +93,22 @@
                                 </div>
                             </div>
 
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
                                 <div class="form-group">
                                    
                                         {{Form::number('quantidade', null, ['class'=>"form-control", 'placeholder'=>"Quantidade"]) }}
                                         @if($errors->has('quantidade'))
                                         <span class="text-danger">{{$errors->first('quantidade')}}</span>
+                                        @endif
+                                </div>
+                            </div>
+
+                            <div class="col-lg-2 col-md-2 col-sm-2 col-xs-12">
+                                <div class="form-group">
+                                   
+                                        {{Form::date('data_caducidade', null, ['class'=>"form-control", 'placeholder'=>"Data de Caducidade"]) }}
+                                        @if($errors->has('data_caducidade'))
+                                        <span class="text-danger">{{$errors->first('data_caducidade')}}</span>
                                         @endif
                                 </div>
                             </div>

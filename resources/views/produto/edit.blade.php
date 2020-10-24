@@ -61,7 +61,7 @@
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                  
-                                        {{Form::text('descricao', $getProduto->descicao, ['class'=>"form-control", 'placeholder'=>"Descrição"])}}
+                                        {{Form::text('descricao', $getProduto->descricao, ['class'=>"form-control", 'placeholder'=>"Descrição"])}}
                                         @if($errors->has('descricao'))
                                         <span class="text-danger">{{$errors->first('descricao')}}</span>
                                         @endif
@@ -93,27 +93,7 @@
                             </div>
                          
                         </div>
-                        <div class="row">
-                           
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                   
-                                        {{Form::date('data_caducidade', $getProduto->data_caducidade, ['class'=>"form-control", 'placeholder'=>"Data de Caducidade"]) }}
-                                        @if($errors->has('data_caducidade'))
-                                        <span class="text-danger">{{$errors->first('data_caducidade')}}</span>
-                                        @endif
-                                </div>
-                            </div>
-                            <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                                <div class="form-group">
-                                    
-                                        {{Form::number('quantidade', $getProduto->quantidade, ['class'=>"form-control", 'placeholder'=>"Quantidade"])}}
-                                        @if($errors->has('quantidade'))
-                                        <span class="text-danger">{{$errors->first('quantidade')}}</span>
-                                        @endif
-                                </div>
-                            </div>
-                        </div>
+                   
                        
                        <div class="row">
                            <div class="col-md-2">

@@ -18,7 +18,7 @@ class CompraController extends Controller
      */
     public function index()
     {
-        $compras = NotaCompra::paginate(5);
+        $compras = NotaCompra::orderBy('id', 'desc')->paginate(5);
 
         $data = [
             'title' => "Compras",
@@ -208,7 +208,7 @@ class CompraController extends Controller
             'valor_venda' => ['required', 'numeric']
         ]);
 
-        $data = [
+        $data['item_compra'] = [
             'id_usuario' => Auth::user()->id,
             'id_produto' => $request->id_produto,
             'id_nota_compra' => $id_compra,
@@ -217,15 +217,33 @@ class CompraController extends Controller
             'valor_venda' => $request->valor_venda
         ];
 
+
+        $produto = Produto::find($data['item_compra']['id_produto']);
+        if (!$produto) {
+            return back()->with(['error' => "Não encontrou o produto"]);
+        }
+
+        if ($produto->id_tipo == 1) {
+            $request->validate(['data_caducidade' => 'required', 'date']);
+        }
+
+        $data['produto'] = [
+            'data_caducidade' => $request->data_caducidade
+        ];
+
         if (ItemCompra::where([
-            'id_produto' => $data['id_produto'],
-            'id_nota_compra' => $data['id_nota_compra']
+            'id_produto' => $data['item_compra']['id_produto'],
+            'id_nota_compra' => $data['item_compra']['id_nota_compra']
         ])->first()) {
             return back()->with(['error' => "Já cadastrou este produto nesta compra"]);
         }
 
-        if (ItemCompra::create($data)) {
-            if (Produto::find($data['id_produto'])->increment('quantidade', $data['quantidade'])) {
+        if (ItemCompra::create($data['item_compra'])) {
+            if (Produto::find($data['item_compra']['id_produto'])->increment('quantidade', $data['item_compra']['quantidade'])) {
+                if ($produto->id_tipo == 1) {
+                    Produto::find($data['item_compra']['id_produto'])->update($data['produto']);
+                }
+
                 return back()->with(['success' => "Feito com sucesso"]);
             }
         }

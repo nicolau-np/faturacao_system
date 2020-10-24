@@ -58,8 +58,20 @@
                                    Classe do Produto: {{$getProduto->classe_produto->classe}}<br/>
                                    Quantidade: {{$getProduto->quantidade}}<br/>
                                     Data de Caducidade: {{date('d-m-Y', strtotime($getProduto->data_caducidade))}} <br/>
-                                   Valor de Compra: <br/>
-                                   Valor de Venda: <br/>
+                                   Valor de Compra:
+                                   @if ($getProduto->item_compra->count()>=1)
+                                       {{number_format($getProduto->item_compra->last()->valor_compra,2,',','.')}}
+                                    @else
+                                       Sem valor de compra
+                                   @endif 
+                                   <br/>
+                                   Valor de Venda: 
+                                   @if ($getProduto->item_compra->count()>=1)
+                                       {{number_format($getProduto->item_compra->last()->valor_venda,2,',','.')}}
+                                    @else
+                                       Sem valor de venda
+                                   @endif 
+                                   <br/>
                                    </div>
                                
                                 </div>

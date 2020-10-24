@@ -62,7 +62,13 @@
                                         <td>{{$produto->tipo_produto->tipo}}</td>
                                         <td>{{$produto->classe_produto->classe}}</td>
                                         <td>{{$produto->quantidade}}</td>
-                                        <td>{{$produto->valor_venda}}</td>
+                                        <td>
+                                            @if ($produto->item_compra->count()>=1)
+                                                {{number_format($produto->item_compra->last()->valor_venda,2,',','.')}}
+                                            @else
+                                            Sem valor
+                                            @endif
+                                        </td>
                                         <td>
                                             <a href="/produtos/show/{{$produto->id}}" class="btn btn-success btn-sm">Ver mais</a>
                                             <a href="/produtos/edit/{{$produto->id}}" class="btn btn-primary btn-sm">Editar</a>
