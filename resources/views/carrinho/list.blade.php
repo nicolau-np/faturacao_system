@@ -17,12 +17,19 @@
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
-                                        <th>Quant</th>
+                                        <th>Quant.</th>
                                         <th>Preço Venda</th>
                                         <th>Operações</th>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @foreach ($getitemVenda as $item_venda)
+                                    <tr>
+                                       <td>{{$item_venda->produto->nome}}</td>
+                                       <td>{{$item_venda->quantidade}}</td>
+                                       <td>{{number_format($item_venda->valor_venda,2,',','.')}}</td>
+                                   </tr> 
+                                    @endforeach
                                    
                                 </tbody>
                             <div class="links">
