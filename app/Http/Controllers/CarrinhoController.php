@@ -74,7 +74,7 @@ class CarrinhoController extends Controller
             return back()->with(['error' => "Quantidade Indisponivel"]);
         }
 
-        if (ItemVenda::create($data)) {
+        if (ItemVenda::create($data['item_venda'])) {
             return back()->with(['success' => "Adicionado"]);
         }
     }
