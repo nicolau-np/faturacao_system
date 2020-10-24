@@ -53,6 +53,7 @@ class CarrinhoController extends Controller
             'quantidade' => $request->quantidade,
             'valor_compra' => $produto->item_compra->last()->valor_compra,
             'valor_venda' => $produto->item_compra->last()->valor_venda,
+            'valor' => ($produto->item_compra->last()->valor_venda * $request->quantidade)
         ];
 
         if (ItemVenda::where(['id_nota_venda' => $id, 'id_produto' => $request->id_produto])->first()) {

@@ -13,12 +13,25 @@
                             <p></p>
                         </div>
                         <div class="table-responsive">
+                            <div class="form_desc">
+                                <?php
+                                $total = 0;
+                               
+                                 foreach ($getitemVenda as $item){
+                                    $total = $total + $item->valor;
+                                  }
+                                 ?>
+                                <span style="font-size: 16px; font-weight:bold; color:#000;">Total:</span> <span style="font-size: 16px; font-weight:bold; color:red;">{{number_format($total,2,',','.')}}</span>
+                               
+                                
+                            </div>
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
                                         <th>Nome</th>
                                         <th>Quant.</th>
-                                        <th>Preço Venda</th>
+                                        <th>Preço Unit.</th>
+                                        <th>Total</th>
                                         <th>Operações</th>
                                     </tr>
                                 </thead>
@@ -28,6 +41,7 @@
                                        <td>{{$item_venda->produto->nome}}</td>
                                        <td>{{$item_venda->quantidade}}</td>
                                        <td>{{number_format($item_venda->valor_venda,2,',','.')}}</td>
+                                       <td>{{number_format($item_venda->valor,2,',','.')}}</td>
                                    </tr> 
                                     @endforeach
                                    

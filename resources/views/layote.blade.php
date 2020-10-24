@@ -10,7 +10,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}" />
     <!-- favicon
 		============================================ -->
-    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/img/favicon.ico')}}">
+    <link rel="shortcut icon" type="image/x-icon" href="{{asset('assets/images/novo/faturacao-system-logo.jpg')}}">
     <!-- Google Fonts
 		============================================ -->
     <link href="https://fonts.googleapis.com/css?family=Roboto:100,300,400,700,900" rel="stylesheet">
@@ -76,7 +76,11 @@
             <div class="row">
                 <div class="col-lg-4 col-md-4 col-sm-12 col-xs-12">
                     <div class="logo-area">
-                        <a href="#"><img src="{{asset('assets/img/logo/logo.png')}}" alt="" /></a>
+                        <a href="/">
+                          <div class="logo" style="font-weight:bold; font-size: 28px; font-family:Uroob; color:#fff;">
+                            no<span style="color:#000;">Caixa</span>
+                              </div>  
+                        </a>
                     </div>
                 </div>
                 <div class="col-lg-8 col-md-8 col-sm-12 col-xs-12">
@@ -226,6 +230,7 @@
                                     </div>
                                 </div>
                             </li>
+                            
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-menus"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>2</span></div></a>
                                 <div role="menu" class="dropdown-menu message-dd task-dd animated zoomIn">
                                     <div class="hd-mg-tt">
@@ -271,8 +276,12 @@
                                     </div>
                                 </div>
                             </li>
+
+
+
+                            
                             @if ($menu=='Home')
-                          <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-chat"></i></span></a>
+                          <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="fa fa-cart-arrow-down"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>4</span></div></a>
                                 <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
                                     <div class="hd-mg-tt">
                                         <h2>Carrinho de Compra</h2>
