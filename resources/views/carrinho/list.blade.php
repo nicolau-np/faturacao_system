@@ -14,6 +14,7 @@
                         </div>
                         <div class="table-responsive">
                             <div class="form_desc">
+                                {{Form::open(['name'=>"form_pag", 'url'=>""]) }}
                                 <?php
                                 $total = 0;
                                
@@ -22,8 +23,11 @@
                                   }
                                  ?>
                                 <span style="font-size: 16px; font-weight:bold; color:#000;">Total:</span> <span style="font-size: 16px; font-weight:bold; color:red;">{{number_format($total,2,',','.')}}</span>
+                                {{Form::number('total_venda', $total, ['placeholder'=>"Valor em Posse", 'class'=>'total_venda']) }}
+                                {{Form::number('valor_emposse', null, ['placeholder'=>"Valor em Posse", 'class'=>'valor_emposse']) }}
                                
-                                
+                                <span style="font-size: 16px; font-weight:bold; color:#000;">Troco:</span> <span style="font-size: 16px; font-weight:bold; color:red;" class="troco"></span>
+                                {{Form::close()}}
                             </div>
                             <table class="table table-striped">
                                 <thead>
@@ -42,6 +46,7 @@
                                        <td>{{$item_venda->quantidade}}</td>
                                        <td>{{number_format($item_venda->valor_venda,2,',','.')}}</td>
                                        <td>{{number_format($item_venda->valor,2,',','.')}}</td>
+                                       <td></td>
                                    </tr> 
                                     @endforeach
                                    
@@ -135,6 +140,15 @@
                         console.log(response);
                     }
                 });
+            });
+
+            $('.valor_emposse').keyup(function(){
+                var total_venda = $('.total_venda').val();
+               var valor_emposse = $(this).val();
+                var troco = valor_emposse - total_venda;
+
+                $('.troco').html(troco);
+                
             });
         });
     </script>
