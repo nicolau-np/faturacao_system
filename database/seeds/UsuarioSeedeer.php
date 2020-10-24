@@ -20,14 +20,14 @@ class UsuarioSeedeer extends Seeder
                 'nivel_acesso' => "admin"
             ],
             [
-                'id_pessoa' => 1,
+                'id_pessoa' => 2,
                 'username' => "hebraim.zua",
                 'password' => Hash::make("olaola"),
                 'estado' => "on",
                 'nivel_acesso' => "gerente"
             ],
             [
-                'id_pessoa' => 1,
+                'id_pessoa' => 3,
                 'username' => "fernanda.rosa",
                 'password' => Hash::make("babaca"),
                 'estado' => "on",
