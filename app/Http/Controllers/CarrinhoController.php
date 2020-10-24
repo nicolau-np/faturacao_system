@@ -35,6 +35,11 @@ class CarrinhoController extends Controller
         if (!$nota_venda) {
             return back()->with(['error' => "Não encontrou a nota de venda"]);
         }
+
+        if($nota_venda->status == "terminado"){
+            return back()->with(['error'=>"Já finalizou esta venda"]);
+        }
+        
         $totalProduto_processo = 0;
         $produto = Produto::find($request->id_produto);
 
@@ -90,6 +95,10 @@ class CarrinhoController extends Controller
         if (!$item_venda) {
             return back()->with(['error' => "Não encontrou este item no carrinho"]);
         }
+        
+        if($item_venda->nota_venda->status == "terminado"){
+            return back()->with(['error'=>"Já finalizou esta venda"]);
+        }
 
         if (ItemVenda::find($id_item_venda)->delete()) {
             return back()->with(['success' => "Produto eliminado com sucesso"]);
@@ -104,6 +113,10 @@ class CarrinhoController extends Controller
         $item_venda = ItemVenda::find($id_item_venda);
         if (!$item_venda) {
             return back()->with(['error' => "Não encontrou este item no carrinho"]);
+        }
+
+        if($item_venda->nota_venda->status == "terminado"){
+            return back()->with(['error'=>"Já finalizou esta venda"]);
         }
 
         $data['item_venda'] = [
@@ -149,6 +162,10 @@ class CarrinhoController extends Controller
             return back()->with(['error' => "Não encontrou este item no carrinho"]);
         }
 
+        if($item_venda->nota_venda->status == "terminado"){
+            return back()->with(['error'=>"Já finalizou esta venda"]);
+        }
+
         if ($item_venda->quantidade <= 1) {
             return back()->with(['error' => "Já não pode descontar mais"]);
         }
@@ -173,7 +190,7 @@ class CarrinhoController extends Controller
         }
 
         if($nota_venda->status == "terminado"){
-            return back()->with(['error'=>"Já finalizou esta compra"]);
+            return back()->with(['error'=>"Já finalizou esta venda"]);
         }
 
         $request->validate([
