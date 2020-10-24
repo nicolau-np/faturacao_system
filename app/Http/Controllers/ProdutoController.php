@@ -66,12 +66,12 @@ class ProdutoController extends Controller
 
         ]);
 
-    $data = [
-    'id_classe_produto'=>$request->id_classe_produto,
-    'id_tipo'=>$request->id_tipo,
-    'nome'=>$request->nome,
-    'quantidade'=>0
-    ];
+        $data = [
+            'id_classe_produto' => $request->id_classe_produto,
+            'id_tipo' => $request->id_tipo,
+            'nome' => $request->nome,
+            'quantidade' => 0
+        ];
         if (Produto::create($data)) {
             return back()->with(['success' => "Feito com sucesso"]);
         }
@@ -177,5 +177,16 @@ class ProdutoController extends Controller
         ];
 
         return view("ajax.getProduto", $data);
+    }
+
+    public function getProdutoCarrinho(Request $request)
+    {
+        $produto = Produto::where('nome', 'LIKE', "%{$request->produto}%")->get();
+
+        $data = [
+            'getProduto' => $produto
+        ];
+
+        return view("ajax.getProdutoCarrinho", $data);
     }
 }

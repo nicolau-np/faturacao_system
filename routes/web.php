@@ -65,11 +65,17 @@ Route::group(['prefix' => '/vendas', 'middleware' => 'auth'], function () {
     Route::get('/novo', "VendaController@create");
 });
 
+Route::group(['prefix' => '/carrinho', 'middleware'=>'auth'], function () {
+    Route::get('/list/{id_nota_venda}', "CarrinhoController@index");
+    Route::put('/store/{id_nota_venda}', "CarrinhoController@store");
+});
+
 Route::group(['prefix' => '/notas_venda'], function () {
     Route::get('/store', "NotaVendaController@store");
 });
 
 Route::post('getMunicipio', "MunicipioController@getMunicipio")->middleware('auth')->name('getMunicipio');
 Route::post('getProduto', "ProdutoController@getProduto")->middleware('auth')->name('getProduto');
+Route::post('getProdutoCarrinho', "ProdutoController@getProdutoCarrinho")->middleware('auth')->name('getProdutoCarrinho');
 
 Route::get('/grafico', "GraficoController@grafico");
