@@ -84,11 +84,114 @@ class CarrinhoController extends Controller
     {
     }
 
-    public function increment()
+    public function destroy($id_item_venda)
     {
+        $item_venda = ItemVenda::find($id_item_venda);
+        if (!$item_venda) {
+            return back()->with(['error' => "Não encontrou este item no carrinho"]);
+        }
+
+        if (ItemVenda::find($id_item_venda)->delete()) {
+            return back()->with(['success' => "Produto eliminado com sucesso"]);
+        }
     }
 
-    public function decrement()
+    public function increment($id_item_venda)
     {
+        $total_produtoDisponivel = 0;
+        $totalProduto_processo = 0;
+        $nova_quantidade = 0;
+        $item_venda = ItemVenda::find($id_item_venda);
+        if (!$item_venda) {
+            return back()->with(['error' => "Não encontrou este item no carrinho"]);
+        }
+
+        $data['item_venda'] = [
+            'valor' => null
+        ];
+        $data['where_itemVenda'] = [
+            'status' => "processo",
+            'id_produto' => $item_venda->id_produto
+        ];
+
+        $nova_quantidade = $item_venda->quantidade + 1;
+        $produto = Produto::find($item_venda->id_produto);
+
+        if ($produto->quantidade < 1) {
+            return back()->with(['error' => "Quantidade Indisponivel"]);
+        }
+
+         $item_venda = ItemVenda::getTotalproduto($data['where_itemVenda']);
+        if ($item_venda->count() >= 1) {
+            foreach ($item_venda as $item) {
+                $totalProduto_processo = $totalProduto_processo + $item->quantidade;
+            }
+        }
+
+        $total_produtoDisponivel = $produto->quantidade - $totalProduto_processo;
+        if ($total_produtoDisponivel < 1) {
+            return back()->with(['error' => "Quantidade Indisponivel"]);
+        }
+
+        if (ItemVenda::find($id_item_venda)->increment('quantidade', 1)) {
+            $data['item_venda']['valor'] = ($produto->item_compra->last()->valor_venda * $nova_quantidade);
+            if (ItemVenda::find($id_item_venda)->update($data['item_venda'])) {
+                return back()->with(['success' => "Adicionou uma quantidade em " . $produto->nome]);
+            }
+        }
+    }
+
+    public function decrement($id_item_venda)
+    {
+        $nova_quantidade = 0;
+        $item_venda = ItemVenda::find($id_item_venda);
+        if (!$item_venda) {
+            return back()->with(['error' => "Não encontrou este item no carrinho"]);
+        }
+
+        if ($item_venda->quantidade <= 1) {
+            return back()->with(['error' => "Já não pode descontar mais"]);
+        }
+        $data = [
+            'valor' => null
+        ];
+        $nova_quantidade = $item_venda->quantidade - 1;
+        if (ItemVenda::find($id_item_venda)->decrement('quantidade', 1)) {
+            $produto = Produto::find($item_venda->id_produto);
+            $data['valor'] = ($produto->item_compra->last()->valor_venda * $nova_quantidade);
+            if (ItemVenda::find($id_item_venda)->update($data)) {
+                return back()->with(['success' => "Descontou uma quantidade em " . $produto->nome]);
+            }
+        }
+    }
+
+    public function finalizar(Request $request, $id_notaVenda)
+    {
+        $nota_venda = NotaVenda::find($id_notaVenda);
+        if(!$nota_venda){
+            return back()->with(['error'=>"Nota de venda não encontrada"]);
+        }
+
+        if($nota_venda->status == "terminado"){
+            return back()->with(['error'=>"Já finalizou esta compra"]);
+        }
+
+        $request->validate([
+            'total_venda'=>['required', 'numeric']
+        ]);
+        
+        $data['nota_venda'] = [
+            'valor_total'=>$request->total_venda,
+            'desconto'=>$request->desconto,
+            'status'=>"terminado"
+        ];
+
+        if(NotaVenda::find($id_notaVenda)->update($data['nota_venda'])){
+            $itens_venda = ItemVenda::where('id_nota_venda', $id_notaVenda)->get();
+            foreach($itens_venda as $item){
+                Produto::find($item->id_produto)->decrement('quantidade', $item->quantidade);
+            }
+            return back()->with(['success'=>"Compra Terminada com sucesso"]);
+        }
     }
 }

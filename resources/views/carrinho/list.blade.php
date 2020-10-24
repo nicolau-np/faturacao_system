@@ -6,7 +6,7 @@
     <div class="data-table-area">
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-8 col-md-8 col-sm-8 col-xs-12">
                     <div class="data-table-list">
                         <div class="basic-tb-hd">
                             <h2></h2>
@@ -14,7 +14,7 @@
                         </div>
                         <div class="table-responsive">
                             <div class="form_desc">
-                                {{Form::open(['name'=>"form_pag", 'url'=>""]) }}
+                                {{Form::open(['name'=>"form_pag", 'url'=>"/carrinho/finalizar/{$getnotaVenda->id}", 'method'=>"put"]) }}
                                 <?php
                                 $total = 0;
                                
@@ -22,11 +22,29 @@
                                     $total = $total + $item->valor;
                                   }
                                  ?>
-                                <span style="font-size: 16px; font-weight:bold; color:#000;">Total:</span> <span style="font-size: 16px; font-weight:bold; color:red;">{{number_format($total,2,',','.')}}</span>
-                                {{Form::number('total_venda', $total, ['placeholder'=>"Valor em Posse", 'class'=>'total_venda']) }}
-                                {{Form::number('valor_emposse', null, ['placeholder'=>"Valor em Posse", 'class'=>'valor_emposse']) }}
-                               
-                                <span style="font-size: 16px; font-weight:bold; color:#000;">Troco:</span> <span style="font-size: 16px; font-weight:bold; color:red;" class="troco"></span>
+                                 <div class="row">
+                                    {{Form::hidden('total_venda', $total, ['placeholder'=>"Total Venda", 'class'=>'total_venda']) }}
+                                     <div class="col-md-4">
+                                        <span style="font-size: 16px; font-weight:bold; color:#000;">Total:</span> <span style="font-size: 16px; font-weight:bold; color:red;">{{number_format($total,2,',','.')}}</span>
+                                     </div>
+                                     <div class="col-md-3">
+                                        {{Form::number('valor_emposse', null, ['placeholder'=>"Valor em Posse", 'class'=>'form-control valor_emposse']) }}
+                                     </div>
+                                     <div class="col-md-3">
+                                        {{Form::number('desconto', null, ['placeholder'=>"Desconto", 'class'=>'form-control']) }}
+                                     </div>
+                                     <div class="col-md-2">
+                                         <button type="submit"><i class="fa fa-check"></i></button>
+                                        
+                                     </div>
+                                 </div>
+                                
+                                <div class="row">
+                                    <div class="col-md-4">
+                                        <span style="font-size: 16px; font-weight:bold; color:#000;">Troco:</span> <span style="font-size: 16px; font-weight:bold; color:red;" class="troco"></span>
+                                    </div>
+                                </div>
+                                
                                 {{Form::close()}}
                             </div>
                             <table class="table table-striped">
@@ -43,10 +61,16 @@
                                     @foreach ($getitemVenda as $item_venda)
                                     <tr>
                                        <td>{{$item_venda->produto->nome}}</td>
-                                       <td>{{$item_venda->quantidade}}</td>
+                                       <td>
+                                           <a href="/carrinho/increment/{{$item_venda->id}}"><i class="fa fa-plus-circle fa-2x"></i></a>&nbsp;
+                                           {{$item_venda->quantidade}}&nbsp;
+                                           <a href="@if($item_venda->quantidade<=1) # @else /carrinho/decrement/{{$item_venda->id}}  @endif"><i class="fa fa-minus-circle fa-2x"></i></a>
+                                        </td>
                                        <td>{{number_format($item_venda->valor_venda,2,',','.')}}</td>
                                        <td>{{number_format($item_venda->valor,2,',','.')}}</td>
-                                       <td></td>
+                                       <td>
+                                           <a href="#" data-id_item_venda = "{{$item_venda->id}}" class="eliminarProduto"><i class="fa fa-trash fa-2x"></i></a>
+                                        </td>
                                    </tr> 
                                     @endforeach
                                    
@@ -59,7 +83,7 @@
                     </div>
                 </div>
 
-                <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                     {{Form::open(['method'=>"put", 'name'=>"form_itemVenda", 'url'=>"/carrinho/store/{$getnotaVenda->id}"])}}
                     {{csrf_field()}}
 					@if(session('error'))
@@ -149,6 +173,15 @@
 
                 $('.troco').html(troco);
                 
+            });
+
+            $('.eliminarProduto').click(function(){
+                var id_item_venda = $(this).data('id_item_venda');
+                var confi = confirm("Deseja eliminar Produto?");
+                
+                if(confi == 1){
+                window.location.href = "{{ url('/carrinho/eliminarProduto/') }}/"+id_item_venda;
+                }
             });
         });
     </script>

@@ -68,6 +68,10 @@ Route::group(['prefix' => '/vendas', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => '/carrinho', 'middleware'=>'auth'], function () {
     Route::get('/list/{id_nota_venda}', "CarrinhoController@index");
     Route::put('/store/{id_nota_venda}', "CarrinhoController@store");
+    Route::put('/finalizar/{id_nota_venda}', "CarrinhoController@finalizar");
+    Route::get('/eliminarProduto/{id_item_venda}', "CarrinhoController@destroy");
+    Route::get('/decrement/{id_item_venda}', "CarrinhoController@decrement");
+    Route::get('/increment/{id_item_venda}', "CarrinhoController@increment");
 });
 
 Route::group(['prefix' => '/notas_venda'], function () {
