@@ -115,8 +115,8 @@
     <div class="total">
         Total Pago: {{number_format($getNotaVenda->valor_total, 2, ',','.')}} Akz
       
-    </div>
-<div class="data">Data: {{date('d-m-Y', strtotime($getNotaVenda->created_at))}} {{date('H:i:s', strtotime($getNotaVenda->created_at))}}</div>
+    </div>date
+<div class="data">Data: {{('d-m-Y', strtotime($getNotaVenda->created_at))}} {{date('H:i:s', strtotime($getNotaVenda->created_at))}}</div>
 <br/>
 <br/>
 <div class="obs">

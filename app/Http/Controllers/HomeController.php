@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\NotaVenda;
+use App\Produto;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -30,13 +31,16 @@ class HomeController extends Controller
         ];
 
         $carrinho = NotaVenda::where($data['nota_venda'])->get();
-
+        $produtos = Produto::where('quantidade','<=', 8)->get();
+        $vendas_processo = NotaVenda::where('status', "processo")->get();
         $data = [
             'title' => "Sistema de Facturção",
             'menu' => "Home",
             'submenu' => "",
             'type' => "home",
-            'getNotaVenda' => $carrinho
+            'getNotaVenda' => $carrinho,
+            'getProdutosStoque'=>$produtos,
+            'getVendaProcesso'=>$vendas_processo
         ];
 
         return view("home", $data);

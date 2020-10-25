@@ -92,33 +92,19 @@
                         <p>Lista de produtos que apresentam um stoque baixo da média, alerta informativa</p>
                     </div>
                     <div class="dash-widget-visits"></div>
-                    <div class="past-statistic-an">
+                    @foreach ($getProdutosStoque as $produto_stoque)
+                         <div class="past-statistic-an">
                         <div class="past-statistic-ctn">
-                            <h3><span class="counter">3,20,000</span></h3>
-                            <p>prod 1</p>
+                            <h4><span class="counter">{{$produto_stoque->quantidade}}</span></h4>
+                            <p>{{$produto_stoque->nome}}</p>
                         </div>
                         <div class="past-statistic-graph">
                             <div class="stats-bar"></div>
                         </div>
                     </div>
-                    <div class="past-statistic-an">
-                        <div class="past-statistic-ctn">
-                            <h3><span class="counter">1,03,000</span></h3>
-                            <p>prod 2</p>
-                        </div>
-                        <div class="past-statistic-graph">
-                            <div class="stats-line"></div>
-                        </div>
-                    </div>
-                    <div class="past-statistic-an">
-                        <div class="past-statistic-ctn">
-                            <h3><span class="counter">24,00,000</span></h3>
-                            <p>prod 4</p>
-                        </div>
-                        <div class="past-statistic-graph">
-                            <div class="stats-bar-2"></div>
-                        </div>
-                    </div>
+                    @endforeach
+                   
+                
                 </div>
             </div>
         </div>
@@ -152,43 +138,23 @@
                         </div>
                     </div>
                     <div class="recent-post-items">
-                        <div class="recent-post-signle rct-pt-mg-wp">
+                        @foreach ($getVendaProcesso as $venda_processo)
+                              <div class="recent-post-signle rct-pt-mg-wp">
                             <a href="#">
                                 <div class="recent-post-flex">
                                     <div class="recent-post-img">
                                         <img src="img/post/2.jpg" alt="">
                                     </div>
                                     <div class="recent-post-it-ctn">
-                                        <h2>Smith</h2>
-                                        <p>Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</p>
+                                    <h2>{{$venda_processo->usuario->username}}</h2>
+                                    <p>{{date('d-m-Y', strtotime($venda_processo->created_at))}} {{date('H:i:s', strtotime($venda_processo->created_at))}}</p>
                                     </div>
                                 </div>
                             </a>
                         </div>
-                        <div class="recent-post-signle">
-                            <a href="#">
-                                <div class="recent-post-flex rct-pt-mg">
-                                    <div class="recent-post-img">
-                                        <img src="img/post/1.jpg" alt="">
-                                    </div>
-                                    <div class="recent-post-it-ctn">
-                                        <h2>John Deo</h2>
-                                        <p>Nunc quis diam diamurabitur at dolor elementum, dictum turpis vel</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
+                        @endforeach
+                      
                      
-                     
-                        <div class="recent-post-signle">
-                            <a href="#">
-                                <div class="recent-post-flex rc-ps-vw">
-                                    <div class="recent-post-line rct-pt-mg">
-                                        <p>View All</p>
-                                    </div>
-                                </div>
-                            </a>
-                        </div>
                     </div>
                 </div>
             </div>
