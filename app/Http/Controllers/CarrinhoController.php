@@ -210,7 +210,7 @@ class CarrinhoController extends Controller
             }
            // return back()->with(['success' => "Compra Terminada com sucesso"]);
 
-           return redirect('/carrinho/fatura/' . $id_notaVenda);
+           return redirect('/relatorios/fatura/' . $id_notaVenda);
         }
         
     }

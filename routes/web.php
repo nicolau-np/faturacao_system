@@ -72,6 +72,9 @@ Route::group(['prefix' => '/carrinho', 'middleware' => 'auth'], function () {
     Route::get('/eliminarProduto/{id_item_venda}', "CarrinhoController@destroy");
     Route::get('/decrement/{id_item_venda}', "CarrinhoController@decrement");
     Route::get('/increment/{id_item_venda}', "CarrinhoController@increment");
+});
+
+Route::group(['prefix' => '/relatorios', 'middleware'=>"auth"], function () {
    Route::get('/fatura/{id_nota_venda}', "RelatorioController@fatura");
 });
 
@@ -85,5 +88,6 @@ Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
     Route::post('getProdutoCarrinho', "ProdutoController@getProdutoCarrinho")->name('getProdutoCarrinho');
 });
 
-
-//Route::get('/grafico', "GraficoController@grafico");
+Route::group(['prefix' => 'graficos', 'middleware'=>"auth"], function () {
+    Route::get('/produtos', "GraficoController@grafico");
+});
