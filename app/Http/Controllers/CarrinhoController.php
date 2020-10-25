@@ -36,10 +36,10 @@ class CarrinhoController extends Controller
             return back()->with(['error' => "Não encontrou a nota de venda"]);
         }
 
-        if($nota_venda->status == "terminado"){
-            return back()->with(['error'=>"Já finalizou esta venda"]);
+        if ($nota_venda->status == "terminado") {
+            return back()->with(['error' => "Já finalizou esta venda"]);
         }
-        
+
         $totalProduto_processo = 0;
         $produto = Produto::find($request->id_produto);
 
@@ -85,7 +85,7 @@ class CarrinhoController extends Controller
         }
     }
 
-    public function update()
+    public function update(Request $request, $id_item_venda)
     {
     }
 
@@ -95,9 +95,9 @@ class CarrinhoController extends Controller
         if (!$item_venda) {
             return back()->with(['error' => "Não encontrou este item no carrinho"]);
         }
-        
-        if($item_venda->nota_venda->status == "terminado"){
-            return back()->with(['error'=>"Já finalizou esta venda"]);
+
+        if ($item_venda->nota_venda->status == "terminado") {
+            return back()->with(['error' => "Já finalizou esta venda"]);
         }
 
         if (ItemVenda::find($id_item_venda)->delete()) {
@@ -115,8 +115,8 @@ class CarrinhoController extends Controller
             return back()->with(['error' => "Não encontrou este item no carrinho"]);
         }
 
-        if($item_venda->nota_venda->status == "terminado"){
-            return back()->with(['error'=>"Já finalizou esta venda"]);
+        if ($item_venda->nota_venda->status == "terminado") {
+            return back()->with(['error' => "Já finalizou esta venda"]);
         }
 
         $data['item_venda'] = [
@@ -134,7 +134,7 @@ class CarrinhoController extends Controller
             return back()->with(['error' => "Quantidade Indisponivel"]);
         }
 
-         $item_venda = ItemVenda::getTotalproduto($data['where_itemVenda']);
+        $item_venda = ItemVenda::getTotalproduto($data['where_itemVenda']);
         if ($item_venda->count() >= 1) {
             foreach ($item_venda as $item) {
                 $totalProduto_processo = $totalProduto_processo + $item->quantidade;
@@ -162,8 +162,8 @@ class CarrinhoController extends Controller
             return back()->with(['error' => "Não encontrou este item no carrinho"]);
         }
 
-        if($item_venda->nota_venda->status == "terminado"){
-            return back()->with(['error'=>"Já finalizou esta venda"]);
+        if ($item_venda->nota_venda->status == "terminado") {
+            return back()->with(['error' => "Já finalizou esta venda"]);
         }
 
         if ($item_venda->quantidade <= 1) {
@@ -185,30 +185,33 @@ class CarrinhoController extends Controller
     public function finalizar(Request $request, $id_notaVenda)
     {
         $nota_venda = NotaVenda::find($id_notaVenda);
-        if(!$nota_venda){
-            return back()->with(['error'=>"Nota de venda não encontrada"]);
+        if (!$nota_venda) {
+            return back()->with(['error' => "Nota de venda não encontrada"]);
         }
 
-        if($nota_venda->status == "terminado"){
-            return back()->with(['error'=>"Já finalizou esta venda"]);
+        if ($nota_venda->status == "terminado") {
+            return back()->with(['error' => "Já finalizou esta venda"]);
         }
 
         $request->validate([
-            'total_venda'=>['required', 'numeric']
+            'total_venda' => ['required', 'numeric']
         ]);
-        
+
         $data['nota_venda'] = [
-            'valor_total'=>$request->total_venda,
-            'desconto'=>$request->desconto,
-            'status'=>"terminado"
+            'valor_total' => $request->total_venda,
+            'desconto' => $request->desconto,
+            'status' => "terminado"
         ];
 
-        if(NotaVenda::find($id_notaVenda)->update($data['nota_venda'])){
+        if (NotaVenda::find($id_notaVenda)->update($data['nota_venda'])) {
             $itens_venda = ItemVenda::where('id_nota_venda', $id_notaVenda)->get();
-            foreach($itens_venda as $item){
+            foreach ($itens_venda as $item) {
                 Produto::find($item->id_produto)->decrement('quantidade', $item->quantidade);
             }
-            return back()->with(['success'=>"Compra Terminada com sucesso"]);
+           // return back()->with(['success' => "Compra Terminada com sucesso"]);
+
+           return redirect('/carrinho/fatura/' . $id_notaVenda);
         }
+        
     }
 }

@@ -72,14 +72,18 @@ Route::group(['prefix' => '/carrinho', 'middleware' => 'auth'], function () {
     Route::get('/eliminarProduto/{id_item_venda}', "CarrinhoController@destroy");
     Route::get('/decrement/{id_item_venda}', "CarrinhoController@decrement");
     Route::get('/increment/{id_item_venda}', "CarrinhoController@increment");
+   Route::get('/fatura/{id_nota_venda}', "RelatorioController@fatura");
 });
 
 Route::group(['prefix' => '/notas_venda'], function () {
     Route::get('/store', "NotaVendaController@store");
 });
 
-Route::post('getMunicipio', "MunicipioController@getMunicipio")->middleware('auth')->name('getMunicipio');
-Route::post('getProduto', "ProdutoController@getProduto")->middleware('auth')->name('getProduto');
-Route::post('getProdutoCarrinho', "ProdutoController@getProdutoCarrinho")->middleware('auth')->name('getProdutoCarrinho');
+Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
+    Route::post('getMunicipio', "MunicipioController@getMunicipio")->name('getMunicipio');
+    Route::post('getProduto', "ProdutoController@getProduto")->name('getProduto');
+    Route::post('getProdutoCarrinho', "ProdutoController@getProdutoCarrinho")->name('getProdutoCarrinho');
+});
 
-Route::get('/grafico', "GraficoController@grafico");
+
+//Route::get('/grafico', "GraficoController@grafico");
