@@ -8,6 +8,7 @@
     <style>
         @page{
             font-family: Arial, Helvetica, sans-serif;
+            font-size: 12px;
         }
         .cabecalho{
           
@@ -40,6 +41,7 @@
 .table{
     width:100%;
     border: 1px solid #333;
+    
 }
 
 .obs{
@@ -60,11 +62,9 @@
 .data{
     padding: 4px;
     border: 1px solid #333;
-    width: 30.3%;
+    width: 28.3%;
 }
-.cabecalho .texto{
-    /*font-family: Arial, Helvetica, sans-serif;*/
-}
+
     </style>
 </head>
 <body>
