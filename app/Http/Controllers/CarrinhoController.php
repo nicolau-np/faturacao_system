@@ -208,8 +208,7 @@ class CarrinhoController extends Controller
             foreach ($itens_venda as $item) {
                 Produto::find($item->id_produto)->decrement('quantidade', $item->quantidade);
             }
-           // return back()->with(['success' => "Compra Terminada com sucesso"]);
-
+           
            return redirect('/relatorios/fatura/' . $id_notaVenda);
         }
         

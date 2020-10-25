@@ -402,19 +402,19 @@
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
-                        <li class="@if($menu=='Home') active @endif"><a data-toggle="tab" href="#Home"><i class="notika-icon notika-house"></i> Home</a>
+                        <li class="@if($menu=='Home') active @endif"><a data-toggle="tab" href="#Home"><i class="fa fa-home"></i> Home</a>
                         </li>
-                        <li><a data-toggle="tab" href="#mailbox"><i class="notika-icon notika-mail"></i> Funcionários</a>
+                        <li><a data-toggle="tab" href="#mailbox"><i class="fa fa-user"></i> Funcionários</a>
                         </li>
-                        <li><a data-toggle="tab" href="#Interface"><i class="notika-icon notika-edit"></i> Clientes</a>
+                        <li><a data-toggle="tab" href="#Interface"><i class="fa fa-users"></i> Clientes</a>
                         </li>
-                        <li class="@if($menu=='Fornecedores') active @endif"><a data-toggle="tab" href="#Charts"><i class="notika-icon notika-bar-chart"></i> Fornecedores</a>
+                        <li class="@if($menu=='Fornecedores') active @endif"><a data-toggle="tab" href="#Charts"><i class="fa fa-cogs"></i> Fornecedores</a>
                         </li>
-                        <li class="@if($menu=='Produtos') active @endif"><a  data-toggle="tab" href="#Tables"><i class="notika-icon notika-windows"></i> Produtos</a>
+                        <li class="@if($menu=='Produtos') active @endif"><a  data-toggle="tab" href="#Tables"><i class="fa fa-paperclip"></i> Produtos</a>
                         </li>
-                        <li class="@if($menu=='Compras') active @endif"><a data-toggle="tab" href="#Forms"><i class="notika-icon notika-form"></i> Compras</a>
+                        <li class="@if($menu=='Compras') active @endif"><a data-toggle="tab" href="#Forms"><i class="fa fa-file-text-o"></i> Compras</a>
                         </li>
-                        <li class="@if($menu=='Vendas') active @endif"><a data-toggle="tab" href="#Appviews"><i class="notika-icon notika-app"></i> Vendas</a>
+                        <li class="@if($menu=='Vendas') active @endif"><a data-toggle="tab" href="#Appviews"><i class="fa fa-bar-chart"></i> Vendas</a>
                         </li>
                        
                         </li>
