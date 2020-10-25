@@ -31,7 +31,7 @@ class HomeController extends Controller
         ];
 
         $carrinho = NotaVenda::where($data['nota_venda'])->get();
-        $produtos = Produto::where('quantidade','<=', 8)->get();
+        $produtos = Produto::orderBy('quantidade', 'asc')->where('quantidade', '<=', 8)->get();
         $vendas_processo = NotaVenda::where('status', "processo")->get();
         $data = [
             'title' => "Sistema de Facturção",
@@ -39,8 +39,8 @@ class HomeController extends Controller
             'submenu' => "",
             'type' => "home",
             'getNotaVenda' => $carrinho,
-            'getProdutosStoque'=>$produtos,
-            'getVendaProcesso'=>$vendas_processo
+            'getProdutosStoque' => $produtos,
+            'getVendaProcesso' => $vendas_processo
         ];
 
         return view("home", $data);

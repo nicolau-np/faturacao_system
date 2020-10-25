@@ -176,11 +176,7 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td class="f-500 c-cyan">4555</td>
-                                        <td>Samsung Galaxy Mega</td>
-                                        <td class="f-500 c-cyan">$921</td>
-                                    </tr>
+                                   
                                     <tr>
                                         <td class="f-500 c-cyan">4556</td>
                                         <td>Huawei Ascend P6</td>
