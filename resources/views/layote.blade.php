@@ -337,7 +337,7 @@
                                 <li><a data-toggle="collapse" data-target="#Charts" href="#">Home</a>
                                     <ul class="collapse dropdown-header-top">
                                         <li><a href="/">Estado Actual</a></li>
-                                        
+                                    <li><a href="{{route('logout')}}">Sair</a></li>
                                     </ul>
                                 </li>
                                 <li><a data-toggle="collapse" data-target="#demoevent" href="#">Funcionários</a>
@@ -423,6 +423,7 @@
                         <div id="Home" class="tab-pane @if($menu=='Home') in active @endif notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/">Estado Actual</a>
+                                <li><a href="{{route('logout')}}">Sair</a>
                                 </li>
                             
                             </ul>

@@ -31,8 +31,9 @@ class HomeController extends Controller
         ];
 
         $carrinho = NotaVenda::where($data['nota_venda'])->get();
-        $produtos = Produto::orderBy('quantidade', 'asc')->where('quantidade', '<=', 8)->get();
-        $vendas_processo = NotaVenda::where('status', "processo")->get();
+        $produtos = Produto::orderBy('quantidade', 'asc')->where('quantidade', '<=', 8)->paginate(3);
+        $vendas_processo = NotaVenda::all();
+        
         $data = [
             'title' => "Sistema de Facturção",
             'menu' => "Home",

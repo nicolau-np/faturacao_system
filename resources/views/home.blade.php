@@ -1,3 +1,8 @@
+@php
+$data_hoje = date("d-m-Y");
+$data_db = null;
+$status = null;
+@endphp
 @extends('layote')
 @section ('content')
 
@@ -104,8 +109,11 @@
                     </div>
                     @endforeach
                    
-                
+                    <div class="pagination" style="display: block; text-align:center;">
+                        {{$getProdutosStoque->links()}}
+                    </div>
                 </div>
+                
             </div>
         </div>
 
@@ -134,12 +142,19 @@
                 <div class="recent-post-wrapper notika-shadow sm-res-mg-t-30 tb-res-ds-n dk-res-ds">
                     <div class="recent-post-ctn">
                         <div class="recent-post-title">
-                            <h2>Vendas em processo</h2>
+                            <h2>Vendas em processo hoje</h2>
                         </div>
                     </div>
                     <div class="recent-post-items">
+                       
                         @foreach ($getVendaProcesso as $venda_processo)
-                              <div class="recent-post-signle rct-pt-mg-wp">
+                        @php
+                            $status = "processo";
+                            $data_db = date('d-m-Y', strtotime($venda_processo->created_at));
+                        @endphp
+                        
+                        @if ($data_db == $data_hoje && $venda_processo->status == $status)
+                        <div class="recent-post-signle rct-pt-mg-wp">
                             <a href="#">
                                 <div class="recent-post-flex">
                                     <div class="recent-post-img">
@@ -152,6 +167,8 @@
                                 </div>
                             </a>
                         </div>
+                        @endif
+                         
                         @endforeach
                       
                      
@@ -163,7 +180,7 @@
                     <div class="rc-it-ltd">
                         <div class="recent-items-ctn">
                             <div class="recent-items-title">
-                                <h2>Vendas concluídas</h2>
+                                <h2>Vendas concluídas hoje</h2>
                             </div>
                         </div>
                         <div class="recent-items-inn">
@@ -176,13 +193,19 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                   
+                                    @foreach ($getVendaProcesso as $venda_processo)
+                                    @php
+                                    $status = "terminado";
+                                    $data_db = date('d-m-Y', strtotime($venda_processo->created_at));
+                                    @endphp
+                                    @if ($data_db == $data_hoje && $venda_processo->status == $status)
                                     <tr>
-                                        <td class="f-500 c-cyan">4556</td>
-                                        <td>Huawei Ascend P6</td>
-                                        <td class="f-500 c-cyan">$240</td>
+                                        <td class="f-500 c-cyan">{{$venda_processo->id}}</td>
+                                        <td>{{$venda_processo->usuario->username}}</td>
+                                    <td class="f-500 c-cyan">{{number_format($venda_processo->valor_total,2,',','.')}}</td>
                                     </tr>
-                              
+                                    @endif
+                                    @endforeach
                                 </tbody>
                             </table>
                         </div>
