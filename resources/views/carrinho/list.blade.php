@@ -58,13 +58,23 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    
                                     @foreach ($getitemVenda as $item_venda)
+                                    {{Form::open(['name'=>"form_changeQuant", 'method'=>"put", 'url'=>"/carrinho/change_quant/{$getnotaVenda->id}/{$item_venda->id}"]) }}
                                     <tr>
                                        <td>{{$item_venda->produto->nome}}</td>
                                        <td>
-                                           <a href="/carrinho/increment/{{$item_venda->id}}"><i class="fa fa-plus-circle fa-2x"></i></a>&nbsp;
-                                           {{$item_venda->quantidade}}&nbsp;
-                                           <a href="@if($item_venda->quantidade<=1) # @else /carrinho/decrement/{{$item_venda->id}}  @endif"><i class="fa fa-minus-circle fa-2x"></i></a>
+                                        <div class="form-inline">
+                                               <a href="@if($item_venda->quantidade<=1) # @else /carrinho/decrement/{{$item_venda->id}}  @endif">
+                                            <i class="fa fa-minus-circle fa-2x"></i>
+                                        </a>&nbsp;
+                                            {{Form::number('quant', $item_venda->quantidade, ['class'=>"form-control", 'placeholder'=>"Quant", 'style'=>"width:60px"])}}
+                                            &nbsp;
+                                            <a href="/carrinho/increment/{{$item_venda->id}}">
+                                            <i class="fa fa-plus-circle fa-2x"></i>
+                                        </a>
+                                        </div>
+                                     
                                         </td>
                                        <td>{{number_format($item_venda->valor_venda,2,',','.')}}</td>
                                        <td>{{number_format($item_venda->valor,2,',','.')}}</td>
@@ -72,7 +82,9 @@
                                            <a href="#" data-id_item_venda = "{{$item_venda->id}}" class="eliminarProduto"><i class="fa fa-trash fa-2x"></i></a>
                                         </td>
                                    </tr> 
+                                   {{Form::close()}}
                                     @endforeach
+                                   
                                    
                                 </tbody>
                             <div class="links">

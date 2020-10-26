@@ -35,12 +35,10 @@ class CarrinhoController extends Controller
             'quantidade' => ['required', 'Integer'],
             'id_produto' => ['required', 'Integer']
         ]);
-        
+        if($request->quantidade<=0){
+            return back()->with(['error'=>"Inserir uma quantidade aceitável"]);
+        }
         return $this->criar_produto($id_notaVenda, $request->quantidade, $request->id_produto);
-    }
-
-    public function update(Request $request, $id_item_venda)
-    {
     }
 
     public function destroy($id_item_venda)
@@ -162,33 +160,33 @@ class CarrinhoController extends Controller
             foreach ($itens_venda as $item) {
                 Produto::find($item->id_produto)->decrement('quantidade', $item->quantidade);
             }
-           
-           return redirect('/relatorios/fatura/' . $id_notaVenda);
+
+            return redirect('/relatorios/fatura/' . $id_notaVenda);
         }
-        
     }
 
-    public function barcode(Request $request, $id_notaVenda){
+    public function barcode(Request $request, $id_notaVenda)
+    {
         $produto = Produto::where('id', $request->barcode)->first();
-        if(!$produto){
-            return back()->with(['error'=>"Produto não encontrado"]);
+        if (!$produto) {
+            return back()->with(['error' => "Produto não encontrado"]);
         }
 
         $nota_venda = NotaVenda::find($id_notaVenda);
-        if(!$nota_venda){
-            return back()->with(['error'=>"Nota de venda não encontrada"]);
+        if (!$nota_venda) {
+            return back()->with(['error' => "Nota de venda não encontrada"]);
         }
 
-        $item_venda = ItemVenda::where(['id_nota_venda'=>$id_notaVenda, 'id_produto'=>$produto->id])->first();
-        if($item_venda){
+        $item_venda = ItemVenda::where(['id_nota_venda' => $id_notaVenda, 'id_produto' => $produto->id])->first();
+        if ($item_venda) {
             return $this->increment($item_venda->id);
-        }else{
+        } else {
             return $this->criar_produto($id_notaVenda, 1, $produto->id);
         }
-   
     }
 
-    public function criar_produto($id_notaVenda, $quantidade, $id_produto){
+    public function criar_produto($id_notaVenda, $quantidade, $id_produto)
+    {
         $nota_venda = NotaVenda::find($id_notaVenda);
         if (!$nota_venda) {
             return back()->with(['error' => "Não encontrou a nota de venda"]);
@@ -201,7 +199,7 @@ class CarrinhoController extends Controller
         $totalProduto_processo = 0;
         $produto = Produto::find($id_produto);
 
-       
+
         $data['where_itemVenda'] = [
             'status' => "processo",
             'id_produto' => $id_produto
@@ -236,6 +234,72 @@ class CarrinhoController extends Controller
         }
 
         if (ItemVenda::create($data['item_venda'])) {
+            return back()->with(['success' => "Adicionado"]);
+        }
+    }
+
+    public function change_quant(Request $request, $id_notaVenda, $id_item_venda)
+    {
+        $quantidade_antiga = 0;
+        $totalProduto_processo_renovado = 0;
+        $tirando_negativo_ProdutoProcesso = 0;
+        $request->validate([
+            'quant'=>['required', 'Integer']
+        ]);
+        if($request->quant<=0){
+            return back()->with(['error'=>"Inserir uma quantidade aceitável"]);
+        }
+        $nota_venda = NotaVenda::find($id_notaVenda);
+        if(!$nota_venda){
+            return back()->with(['error'=>"Não encontrou a nota de venda"]);
+        }
+        $item_venda = ItemVenda::find($id_item_venda);
+        if(!$item_venda){
+            return back()->with(['error'=>"Não encontrou este produto no carrinho"]);
+        }
+
+        if ($nota_venda->status == "terminado") {
+            return back()->with(['error' => "Já finalizou esta venda"]);
+        }
+
+        
+        $totalProduto_processo = 0;
+        $produto = Produto::find($item_venda->id_produto);
+        $quantidade_antiga = $item_venda->quantidade;
+
+        $data['where_itemVenda'] = [
+            'status' => "processo",
+            'id_produto' => $item_venda->id_produto
+        ];
+        
+        $data['item_venda'] = [
+            'quantidade' => $request->quant,
+            'valor' => ($produto->item_compra->last()->valor_venda * $request->quant)
+        ];
+
+        if ($produto->quantidade < $request->quant) {
+            return back()->with(['error' => "Quantidade Indisponivel"]);
+        }
+
+        $item_venda = ItemVenda::getTotalproduto($data['where_itemVenda']);
+        if ($item_venda->count() >= 1) {
+            foreach ($item_venda as $item) {
+                $totalProduto_processo = $totalProduto_processo + $item->quantidade;
+            }
+        }
+        $totalProduto_processo_renovado = $totalProduto_processo - $quantidade_antiga;
+        if($totalProduto_processo_renovado<0){
+            $tirando_negativo_ProdutoProcesso = $totalProduto_processo_renovado *(-1); 
+        }else{
+            $tirando_negativo_ProdutoProcesso = $totalProduto_processo_renovado *1;
+        }
+        
+        $total_produtoDisponivel = $produto->quantidade - $tirando_negativo_ProdutoProcesso;
+        if ($total_produtoDisponivel < $request->quant) {
+            return back()->with(['error' => "Quantidade Indisponivel"]);
+        }
+
+        if (ItemVenda::find($id_item_venda)->update($data['item_venda'])) {
             return back()->with(['success' => "Adicionado"]);
         }
     }

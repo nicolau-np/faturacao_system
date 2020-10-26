@@ -73,6 +73,7 @@ Route::group(['prefix' => '/carrinho', 'middleware' => 'auth'], function () {
     Route::get('/decrement/{id_item_venda}', "CarrinhoController@decrement");
     Route::get('/increment/{id_item_venda}', "CarrinhoController@increment");
     Route::put('/barcode/{id_nota_venda}', "CarrinhoController@barcode");
+    Route::put('/change_quant/{id_nota_venda}/{id_item_venda}', "CarrinhoController@change_quant");
 });
 
 Route::group(['prefix' => '/relatorios', 'middleware'=>"auth"], function () {
