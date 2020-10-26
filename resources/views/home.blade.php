@@ -34,7 +34,7 @@ $status = null;
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                     <div class="website-traffic-ctn">
-                        <h2><span class="counter">90</span></h2>
+                    <h2><span class="counter">{{$getForcendores->count()}}</span></h2>
                         <p>Fornecedores</p>
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -46,7 +46,7 @@ $status = null;
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                     <div class="website-traffic-ctn">
-                        <h2><span class="counter">40</span></h2>
+                        <h2><span class="counter">{{$getProdutos->count()}}</span></h2>
                         <p>Produtos</p>
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -58,7 +58,7 @@ $status = null;
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30 dk-res-mg-t-30">
                     <div class="website-traffic-ctn">
-                        <h2><span class="counter">1000</span></h2>
+                        <h2><span class="counter">{{$getnotaVendas->count()}}</span></h2>
                         <p>Vendas Feitas</p>
                     </div>
                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
