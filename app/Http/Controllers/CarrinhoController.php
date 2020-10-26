@@ -213,4 +213,76 @@ class CarrinhoController extends Controller
         }
         
     }
+
+    public function barcode(Request $request, $id_notaVenda){
+        $produto = Produto::where('id', $request->barcode)->first();
+        if(!$produto){
+            return back()->with(['error'=>"Produto não encontrado"]);
+        }
+
+        $nota_venda = NotaVenda::find($id_notaVenda);
+        if(!$nota_venda){
+            return back()->with(['error'=>"Nota de venda não encontrada"]);
+        }
+
+        $item_venda = ItemVenda::where(['id_nota_venda'=>$id_notaVenda, 'id_produto'=>$produto->id])->first();
+        if($item_venda){
+            return $this->increment($item_venda->id);
+        }else{
+            return $this->criar_produto($id_notaVenda, 1, $produto->id);
+        }
+   
+    }
+
+    public function criar_produto($id_notaVenda, $quantidade, $id_produto){
+        $nota_venda = NotaVenda::find($id_notaVenda);
+        if (!$nota_venda) {
+            return back()->with(['error' => "Não encontrou a nota de venda"]);
+        }
+
+        if ($nota_venda->status == "terminado") {
+            return back()->with(['error' => "Já finalizou esta venda"]);
+        }
+
+        $totalProduto_processo = 0;
+        $produto = Produto::find($id_produto);
+
+       
+        $data['where_itemVenda'] = [
+            'status' => "processo",
+            'id_produto' => $id_produto
+        ];
+        $data['item_venda'] = [
+            'id_nota_venda' => $id_notaVenda,
+            'id_usuario' => Auth::user()->id,
+            'id_produto' => $id_produto,
+            'quantidade' => $quantidade,
+            'valor_compra' => $produto->item_compra->last()->valor_compra,
+            'valor_venda' => $produto->item_compra->last()->valor_venda,
+            'valor' => ($produto->item_compra->last()->valor_venda * $quantidade)
+        ];
+
+        if (ItemVenda::where(['id_nota_venda' => $id_notaVenda, 'id_produto' => $id_produto])->first()) {
+            return back()->with(['error' => "Já adicionou este produto no carrinho"]);
+        }
+
+        if ($produto->quantidade < $quantidade) {
+            return back()->with(['error' => "Quantidade Indisponivel"]);
+        }
+
+        $item_venda = ItemVenda::getTotalproduto($data['where_itemVenda']);
+        if ($item_venda->count() >= 1) {
+            foreach ($item_venda as $item) {
+                $totalProduto_processo = $totalProduto_processo + $item->quantidade;
+            }
+        }
+        $total_produtoDisponivel = $produto->quantidade - $totalProduto_processo;
+        if ($total_produtoDisponivel < $quantidade) {
+            return back()->with(['error' => "Quantidade Indisponivel"]);
+        }
+
+        if (ItemVenda::create($data['item_venda'])) {
+            return back()->with(['success' => "Adicionado"]);
+        }
+    }
 }

@@ -84,8 +84,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    {{Form::open(['method'=>"put", 'name'=>"form_itemVenda", 'url'=>"/carrinho/store/{$getnotaVenda->id}"])}}
-                    {{csrf_field()}}
+                    
 					@if(session('error'))
 					<div class="alert alert-danger">{{session('error')}}</div>
 					@endif
@@ -95,8 +94,20 @@
                     @endif
 
                     <div class="form-element-list">
-                     
                         <div class="row">
+                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
+                                {{Form::open(['name'=>"form_barra", 'method'=>"put", 'url'=>"/carrinho/barcode/{$getnotaVenda->id}"])}}
+                                {{csrf_field()}}
+                                {{Form::text('barcode', null, ['class'=>"form-control", 'placeholder'=>"Codigo de Barra"])}}
+                                {{Form::close()}}
+                            </div>
+                        </div>
+
+                        <hr/>
+                        {{Form::open(['method'=>"put", 'name'=>"form_itemVenda", 'url'=>"/carrinho/store/{$getnotaVenda->id}"])}}
+                        {{csrf_field()}}
+                        <div class="row">
+                            
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
                                  
@@ -132,6 +143,7 @@
                                 @endif
                             </div>
                         </div>
+                        {{Form::close()}}
                         <br/>
                         
                    
