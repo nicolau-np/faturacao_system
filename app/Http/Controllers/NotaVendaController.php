@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\ItemVenda;
 use App\NotaVenda;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -90,5 +91,13 @@ class NotaVendaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function getitemVenda(Request $request){
+        $item_venda = ItemVenda::where('id_nota_venda', $request->id_nota_venda)->get();
+        $data = [
+            'getitemVenda'=>$item_venda
+        ];
+        return view("ajax.getitemVenda", $data);
     }
 }

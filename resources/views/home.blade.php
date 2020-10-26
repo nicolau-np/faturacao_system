@@ -202,7 +202,12 @@ $status = null;
                                     <tr>
                                         <td class="f-500 c-cyan">{{$venda_processo->id}}</td>
                                         <td>{{$venda_processo->usuario->username}}</td>
-                                    <td class="f-500 c-cyan">{{number_format($venda_processo->valor_total,2,',','.')}}</td>
+                                    <td class="f-500 c-cyan">
+                                    <a href="#" class="descricao" data-id_nota_venda="{{$venda_processo->id}}" data-username="{{$venda_processo->usuario->username}}"
+                                         data-total="{{number_format($venda_processo->valor_total,2,',','.')}}"> 
+                                          {{number_format($venda_processo->valor_total,2,',','.')}}
+                                        </a>
+                                    </td>
                                     </tr>
                                     @endif
                                     @endforeach
@@ -217,5 +222,51 @@ $status = null;
     </div>
 </div>
 
+
+<div class="modal fade" id="descItemvenda" role="dialog">
+    <div class="modal-dialog modal-sm">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 class="desc_user"></h2>
+
+               <div class="itens_venda">
+
+               </div>
+            </div>
+            <div class="modal-footer">
+               <button type="button" class="btn btn-default" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+
+<script>
+    $(document).ready(function () {
+        $('.descricao').click(function (e) { 
+            e.preventDefault();
+           var data = {
+                id_nota_venda: $(this).data('id_nota_venda')
+            };
+            $('#descItemvenda').modal('show');
+            $('.desc_user').html('<span style="color:blue">'+$(this).data('username') +'</span>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:red">'+ $(this).data('total')+'</span>')
+            $.ajax({
+                type: "post",
+                url: "{{route('getitemVenda')}}",
+                data: data,
+                dataType: "html",
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                },
+                success: function (response) {
+                    $('.itens_venda').html(response);
+                }
+            });
+        });
+    });
+</script>
 
 @endsection

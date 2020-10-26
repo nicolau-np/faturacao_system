@@ -80,6 +80,7 @@ Route::group(['prefix' => '/relatorios', 'middleware'=>"auth"], function () {
 
 Route::group(['prefix' => '/notas_venda'], function () {
     Route::get('/store', "NotaVendaController@store");
+    Route::post('/getitemVenda', "NotaVendaController@getitemVenda")->name('getitemVenda');
 });
 
 Route::group(['prefix' => 'ajax', 'middleware' => 'auth'], function () {
