@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\ItemVenda;
+use App\NotaVenda;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
@@ -13,7 +15,16 @@ class VendaController extends Controller
      */
     public function index()
     {
-        //
+        $nota_vendas = NotaVenda::orderBy('id', 'desc')->where('status', "terminado")->paginate(6);
+        $data = [
+            'title' => "Vendas",
+            'menu' => "Vendas",
+            'submenu' => "Listar",
+            'type' => "view",
+            'getnotaVenda' => $nota_vendas
+        ];
+
+        return view("venda.list", $data);
     }
 
     /**
@@ -23,14 +34,6 @@ class VendaController extends Controller
      */
     public function create()
     {
-        $data = [
-            'title' => "Vendas",
-            'menu' => "Vendas",
-            'submenu' => "Novo",
-            'type' => "form"
-        ];
-
-        return view("venda.new", $data);
     }
 
     /**
@@ -52,7 +55,21 @@ class VendaController extends Controller
      */
     public function show($id)
     {
-        //
+        $nota_vendas = NotaVenda::find($id);
+        if(!$nota_vendas){
+            return back()->with(['error'=>"Não encontrou nota da venda"]);
+        }
+        $item_venda = ItemVenda::where('id_nota_venda', $id)->get();
+        $data = [
+            'title' => "Vendas",
+            'menu' => "Vendas",
+            'submenu' => "Mostrar",
+            'type' => "show",
+            'getitemVenda' => $item_venda,
+            'getnotaVenda'=>$nota_vendas
+        ];
+
+        return view("venda.show", $data);
     }
 
     /**
