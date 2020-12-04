@@ -189,4 +189,6 @@ class ProdutoController extends Controller
 
         return view("ajax.getProdutoCarrinho", $data);
     }
+
+  
 }

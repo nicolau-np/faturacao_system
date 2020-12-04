@@ -46,9 +46,12 @@
                             <table class="table table-striped">
                                 <thead>
                                     <tr>
+                                        <th>Nome</th>
                                         <th>Usuário</th>
                                         <th>Valor Total</th>
                                         <th>Descontos</th>
+                                        <th>Data</th>
+                                        <th>Hora</th>
                                         <th>Estado</th>
                                         <th>Operações</th>
                                     </tr>
@@ -57,9 +60,12 @@
                                     @foreach ($getnotaVenda as $nota_venda)
                                        
                                     <tr>
+                                        <td>{{$nota_venda->usuario->pessoa->nome}}</td>
                                     <td>{{$nota_venda->usuario->username}}</td>
                                         <td>{{number_format($nota_venda->valor_total,2,',','.')}}</td>
                                         <td>{{number_format($nota_venda->desconto,2,',','.')}}</td>
+                                        <td>{{date('d-m-Y', strtotime($nota_venda->created_at))}}</td>
+                                        <td>{{date('H:i:s', strtotime($nota_venda->created_at))}}</td>
                                         <td>{{$nota_venda->status}}</td>
                                         <td>
                                             <a href="/vendas/show/{{$nota_venda->id}}" class="btn btn-success btn-sm">Ver mais</a>

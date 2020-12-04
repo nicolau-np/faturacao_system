@@ -46,6 +46,7 @@ Route::group(['prefix' => '/produtos', 'middleware' => 'auth'], function () {
     Route::get('/edit/{id_produto}', "ProdutoController@edit")->middleware('gerenteAdmin');
     Route::put('/update/{id_produto}', "ProdutoController@update")->middleware('gerenteAdmin');
     Route::get('/show/{id_produto}', "ProdutoController@show")->middleware('gerenteAdmin');
+    Route::get('/inventario', "RelatorioController@inventario")->middleware('gerenteAdmin');
 });
 
 Route::group(['prefix' => '/compras', 'middleware' => 'auth'], function () {
