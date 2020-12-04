@@ -10,11 +10,11 @@ use function PHPSTORM_META\map;
 
 class FornecedorController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
+   public function __construct()
+   {
+        $this->middleware('gerenteAdmin');   
+   }
+    
     public function index()
     {
         $fornecedores = Fornecedor::paginate(5);

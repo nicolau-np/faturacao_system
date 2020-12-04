@@ -41,11 +41,11 @@ Route::group(['prefix' => '/fornecedores', 'middleware' => 'auth'], function () 
 
 Route::group(['prefix' => '/produtos', 'middleware' => 'auth'], function () {
     Route::get('/', "ProdutoController@index");
-    Route::get('/novo', "ProdutoController@create");
-    Route::post('/store', "ProdutoController@store");
-    Route::get('/edit/{id_produto}', "ProdutoController@edit");
-    Route::put('/update/{id_produto}', "ProdutoController@update");
-    Route::get('/show/{id_produto}', "ProdutoController@show");
+    Route::get('/novo', "ProdutoController@create")->middleware('gerenteAdmin');
+    Route::post('/store', "ProdutoController@store")->middleware('gerenteAdmin');
+    Route::get('/edit/{id_produto}', "ProdutoController@edit")->middleware('gerenteAdmin');
+    Route::put('/update/{id_produto}', "ProdutoController@update")->middleware('gerenteAdmin');
+    Route::get('/show/{id_produto}', "ProdutoController@show")->middleware('gerenteAdmin');
 });
 
 Route::group(['prefix' => '/compras', 'middleware' => 'auth'], function () {

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 
 class VendaController extends Controller
 {
+    
     /**
      * Display a listing of the resource.
      *
