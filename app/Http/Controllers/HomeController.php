@@ -43,14 +43,24 @@ class HomeController extends Controller
             'menu' => "Home",
             'submenu' => "",
             'type' => "home",
-            'getNotaVenda' => $carrinho,
             'getProdutosStoque' => $produtos,
             'getVendaProcesso' => $vendas_processo,
             'getForcendores'=>$fornecedores,
             'getProdutos'=>$produtos_cont,
-            'getnotaVendas'=>$nota_vendas
+            'getnotaVendas'=>$nota_vendas,
+            'getNotaVenda'=>$carrinho,
         ];
 
         return view("home", $data);
+    }
+
+    public static function getCarrinho(){
+        $data['nota_venda'] = [
+            'status' => "processo",
+            'id_usuario' => Auth::user()->id
+        ];
+
+        $carrinho = NotaVenda::where($data['nota_venda'])->get();
+        return $carrinho;
     }
 }

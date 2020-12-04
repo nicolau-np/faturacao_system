@@ -15,6 +15,7 @@ $status = null;
 
     <div class="container">
         <div class="row">
+            @if (Auth::user()->nivel_acesso=="caixa" || Auth::user()->nivel_acesso=="gerente")
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <a href="/notas_venda/store">
                 
@@ -31,6 +32,7 @@ $status = null;
 
             </a>
             </div>
+            @endif
             <div class="col-lg-3 col-md-6 col-sm-6 col-xs-12">
                 <div class="wb-traffic-inner notika-shadow sm-res-mg-t-30 tb-res-mg-t-30">
                     <div class="website-traffic-ctn">

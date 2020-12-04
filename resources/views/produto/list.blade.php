@@ -71,8 +71,12 @@
                                         </td>
                                         <td>
                                             <a href="/produtos/show/{{$produto->id}}" class="btn btn-success btn-sm">Ver mais</a>
+                                            @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                             <a href="/produtos/edit/{{$produto->id}}" class="btn btn-primary btn-sm">Editar</a>
+                                            @endif
+                                            @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                             <a href="#" class="btn btn-danger btn-sm">Eliminar</a>
+                                            @endif
                                         </td>
                                     </tr>
                              

@@ -1,3 +1,7 @@
+@php
+use App\Http\Controllers\HomeController;
+$getCarrinho = HomeController::getCarrinho();
+@endphp
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -279,8 +283,8 @@
 
 
 
+                            @if (Auth::user()->nivel_acesso=="caixa" || Auth::user()->nivel_acesso=="gerente")
                             
-                            @if ($menu=='Home')
                           <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="fa fa-cart-arrow-down"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>4</span></div></a>
                                 <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
                                     <div class="hd-mg-tt">
@@ -291,8 +295,8 @@
                                         <input type="text" placeholder="Localizar carrinho" />
                                     </div>
                                     <div class="hd-message-info">
-                                        @if ($getNotaVenda->count()>=1)
-                                        @foreach ($getNotaVenda as $carrinho)
+                                        @if ($getCarrinho->count()>=1)
+                                        @foreach ($getCarrinho as $carrinho)
                                     <a href="/carrinho/list/{{$carrinho->id}}">
                                             <div class="hd-message-sn">
                                                 <div class="hd-message-img chat-img">
@@ -316,8 +320,7 @@
                                     </div>
                                 </div>
                             </li>
-                            @endif
-                           
+                           @endif
 
                         </ul>
                     </div>
@@ -340,12 +343,15 @@
                                     <li><a href="{{route('logout')}}">Sair</a></li>
                                     </ul>
                                 </li>
+                                @if (Auth::user()->nivel_acesso=="admin")
                                 <li><a data-toggle="collapse" data-target="#demoevent" href="#">Funcionários</a>
                                     <ul id="demoevent" class="collapse dropdown-header-top">
                                         <li><a href="/funcionarios">Lista</a></li>
                                         <li><a href="/funcionarios/novo">Novo</a></li>
                                     </ul>
-                                </li>
+                                </li> 
+                                @endif
+                                @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                 <li><a data-toggle="collapse" data-target="#democrou" href="#">Clientes</a>
                                     <ul id="democrou" class="collapse dropdown-header-top">
                                         <li><a href="/clientes">Lista</a></li>
@@ -353,6 +359,8 @@
                                         <li><a href="/clientes/favoritos">Favoritos</a></li>
                                     </ul>
                                 </li>
+                                @endif
+                                @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                 <li><a data-toggle="collapse" data-target="#demolibra" href="#">Fornecedores</a>
                                     <ul id="demolibra" class="collapse dropdown-header-top">
                                         <li><a href="/fornecedores">Lista</a></li>
@@ -360,22 +368,28 @@
                                         <li><a href="/fornecedores/descatados">Destacados</a></li>
                                     </ul>
                                 </li>
+                                @endif
                                 <li><a data-toggle="collapse" data-target="#demodepart" href="#">Produtos</a>
                                     <ul id="demodepart" class="collapse dropdown-header-top">
                                         <li><a href="/produtos">Lista</a></li>
+                                        @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                         <li><a href="/produtos/novo">Novo</a></li>
                                         <li><a href="/produtos/escassos">Escaços</a></li>
                                         <li><a href="/produtos/stoque">Stoque</a></li>
                                         <li><a href="/produtos/validade">Fora de Validade</a></li>
                                         <li><a href="/produtos/inventario">Inventário</a></li>
+                                        @endif
                                     </ul>
                                 </li>
+                                @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                 <li><a data-toggle="collapse" data-target="#demo" href="#">Compras</a>
                                     <ul id="demo" class="collapse dropdown-header-top">
                                         <li><a href="/compras">Lista</a></li>
                                         <li><a href="/compras/novo">Nova</a></li>
                                     </ul>
                                 </li>
+                                @endif
+                                @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                 <li><a data-toggle="collapse" data-target="#Miscellaneousmob" href="#">Vendas</a>
                                     <ul id="Miscellaneousmob" class="collapse dropdown-header-top">
                                         <li><a href="/vendas">Lista</a>
@@ -387,7 +401,7 @@
                                         
                                     </ul>
                                 </li>
-                             
+                                @endif
                             </ul>
                         </nav>
                     </div>
@@ -404,19 +418,28 @@
                     <ul class="nav nav-tabs notika-menu-wrap menu-it-icon-pro">
                         <li class="@if($menu=='Home') active @endif"><a data-toggle="tab" href="#Home"><i class="fa fa-home"></i> Home</a>
                         </li>
+                        @if (Auth::user()->nivel_acesso=="admin")
                         <li><a data-toggle="tab" href="#mailbox"><i class="fa fa-user"></i> Funcionários</a>
                         </li>
+                        @endif
+                        @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                         <li><a data-toggle="tab" href="#Interface"><i class="fa fa-users"></i> Clientes</a>
                         </li>
+                        @endif
+                        @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                         <li class="@if($menu=='Fornecedores') active @endif"><a data-toggle="tab" href="#Charts"><i class="fa fa-cogs"></i> Fornecedores</a>
                         </li>
+                        @endif
                         <li class="@if($menu=='Produtos') active @endif"><a  data-toggle="tab" href="#Tables"><i class="fa fa-paperclip"></i> Produtos</a>
                         </li>
+                        @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                         <li class="@if($menu=='Compras') active @endif"><a data-toggle="tab" href="#Forms"><i class="fa fa-file-text-o"></i> Compras</a>
                         </li>
+                        @endif
+                        @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                         <li class="@if($menu=='Vendas') active @endif"><a data-toggle="tab" href="#Appviews"><i class="fa fa-bar-chart"></i> Vendas</a>
                         </li>
-                       
+                        @endif
                         </li>
                     </ul>
                     <div class="tab-content custom-menu-content">
@@ -428,12 +451,14 @@
                             
                             </ul>
                         </div>
+                        
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/funcionarios">Lista</a></li>
                                 <li><a href="/funcionarios/novo">Novo</a></li>
                             </ul>
                         </div>
+                        
                         <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/clientes">Lista</a></li>
@@ -448,14 +473,17 @@
                                 <li><a href="/fornecedores/descatados">Destacados</a></li>
                             </ul>
                         </div>
+                        
                         <div id="Tables" class="tab-pane @if($menu=='Produtos') in active @endif notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/produtos">Lista</a></li>
+                                @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                 <li><a href="/produtos/novo">Novo</a></li>
                                 <li><a href="/produtos/escassos">Escaços</a></li>
                                 <li><a href="/produtos/stoque">Stoque</a></li>
                                 <li><a href="/produtos/validade">Fora de Validade</a></li>
                                 <li><a href="/produtos/inventario">Inventário</a></li>
+                                @endif
                             </ul>
                         </div>
                         <div id="Forms" class="tab-pane @if($menu=='Compras') in active @endif notika-tab-menu-bg animated flipInX">

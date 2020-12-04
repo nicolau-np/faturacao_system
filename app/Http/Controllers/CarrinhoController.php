@@ -10,6 +10,11 @@ use Illuminate\Support\Facades\Auth;
 
 class CarrinhoController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('caxaGerente');
+    }
+    
     public function index($id)
     {
         $nota_venda = NotaVenda::find($id);
