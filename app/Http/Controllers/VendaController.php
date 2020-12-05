@@ -145,4 +145,24 @@ class VendaController extends Controller
         $usuarios = User::where('nivel_acesso','!=', 'admin')->get();
         return $usuarios;
     }
+
+    public static function getGraficoTotal($mes, $ano){
+        $retorno = 0;
+        $data = [
+            'mes'=>$mes, 
+            'ano'=>$ano, 
+            'status'=>"terminado", 
+        ];
+        
+        $vendas  = NotaVenda::where($data)->get();
+        if($vendas->count()==0){
+         
+        }else{
+            foreach($vendas as $venda){
+            $retorno = $retorno + $venda->valor_total;
+            }
+        }
+        
+        return $retorno;
+    }
 }

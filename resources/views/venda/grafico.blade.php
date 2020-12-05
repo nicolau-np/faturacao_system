@@ -50,7 +50,7 @@
                       
                     </figure>
                     <script type="text/javascript">
-                        Highcharts.chart('container', {
+                      Highcharts.chart('container', {
                             chart: {
                                 type: 'column'
                             },
@@ -86,7 +86,7 @@
                             tooltip: {
                                 headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
                                 pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-                                    '<td style="padding:0"><b>{point.y:.1f} Akz</b></td></tr>',
+                                    '<td style="padding:0"><b>{point.y:,2f} Akz</b></td></tr>',
                                 footerFormat: '</table>',
                                 shared: true,
                                 useHTML: true
@@ -115,8 +115,20 @@
                             }
                         <?php
                         echo ",";
-                     }?>
-                        ]
+                     }?> 
+                            {
+                                name: "Total",
+                                data: [
+                                    <?php
+                                    foreach($meses as $mes){
+                                        $retorno = 0;
+                                        $retorno = VendaController::getGraficoTotal($mes, $ano);
+                                        echo $retorno.","; 
+        
+                                    }?>
+                            
+                         ]
+                     }]
                         });
                                 </script>
                 </div>
