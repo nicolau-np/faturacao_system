@@ -13,7 +13,9 @@ class NotaVenda extends Model
         'id_usuario',
         'valor_total',
         'desconto',
-        'status'
+        'status',
+        'mes',
+        'ano'
     ];
 
     public function item_venda()

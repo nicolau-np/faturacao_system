@@ -157,7 +157,9 @@ class CarrinhoController extends Controller
         $data['nota_venda'] = [
             'valor_total' => $request->total_venda,
             'desconto' => $request->desconto,
-            'status' => "terminado"
+            'status' => "terminado",
+            'mes'=>date('m'),
+            'ano'=>date('Y'),
         ];
 
         if (NotaVenda::find($id_notaVenda)->update($data['nota_venda'])) {

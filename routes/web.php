@@ -64,6 +64,7 @@ Route::group(['prefix' => '/compras', 'middleware' => 'auth'], function () {
 Route::group(['prefix' => '/vendas', 'middleware' => 'auth'], function () {
     Route::get('/', "VendaController@index");
     Route::get('/show/{id_nota_venda}', "VendaController@show");
+    Route::get('/grafico', "VendaController@grafico");
 });
 
 Route::group(['prefix' => '/carrinho', 'middleware' => 'auth'], function () {

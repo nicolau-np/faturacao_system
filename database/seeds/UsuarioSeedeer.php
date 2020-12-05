@@ -33,6 +33,13 @@ class UsuarioSeedeer extends Seeder
                 'estado' => "on",
                 'nivel_acesso' => "caixa"
             ],
+            [
+                'id_pessoa' => 4,
+                'username' => "miguel.candido",
+                'password' => Hash::make("olaola"),
+                'estado' => "on",
+                'nivel_acesso' => "caixa"
+            ],
         ]);
     }
 }

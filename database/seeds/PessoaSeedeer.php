@@ -27,6 +27,12 @@ static $pessoas = [
         'data_nascimento'=>"1998-02-05",
         'genero'=>"Femenino",
         'estado_civil'=>"solteira" 
+      ], [
+        'id_municipio'=>10,
+        'nome'=>"Miguel Candido",
+        'data_nascimento'=>"1998-02-01",
+        'genero'=>"Masculino",
+        'estado_civil'=>"solteiro" 
       ],
       
 ];

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\ItemVenda;
 use App\NotaVenda;
+use App\User;
 use Illuminate\Http\Request;
 
 class VendaController extends Controller
@@ -105,5 +106,43 @@ class VendaController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function grafico(){
+        $data = [
+            'title' => "Vendas",
+            'menu' => "Vendas",
+            'submenu' => "Gráfico",
+            'type' => "show",
+        ];
+
+        return view("venda.grafico", $data);
+    }
+
+    public static function getValueGrafico($mes, $ano, $id_usuario){
+        $retorno = 0;
+        $data = [
+            'mes'=>$mes, 
+            'ano'=>$ano, 
+            'status'=>"terminado", 
+            'id_usuario'=>$id_usuario
+        ];
+        
+        $vendas  = NotaVenda::where($data)->get();
+        if($vendas->count()==0){
+         
+        }else{
+            foreach($vendas as $venda){
+            $retorno = $retorno + $venda->valor_total;
+            }
+        }
+        
+        return $retorno;
+    }
+
+    public static function getUsuarios(){
+       
+        $usuarios = User::where('nivel_acesso','!=', 'admin')->get();
+        return $usuarios;
     }
 }

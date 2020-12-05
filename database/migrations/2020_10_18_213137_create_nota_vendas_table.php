@@ -20,6 +20,8 @@ class CreateNotaVendasTable extends Migration
             $table->decimal('valor_total', 10, 4)->nullable();
             $table->decimal('desconto', 10, 4)->nullable();
             $table->string('status');
+            $table->bigInteger('mes')->nullable();
+            $table->bigInteger('ano')->nullable();
             $table->timestamps();
         });
 

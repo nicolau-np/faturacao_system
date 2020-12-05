@@ -1,7 +1,11 @@
 @php
 use App\Http\Controllers\HomeController;
-$getCarrinho = HomeController::getCarrinho();
-@endphp
+if($type!="login"){
+   $getCarrinho = HomeController::getCarrinho(); 
+}
+@endphp  
+
+
 <!doctype html>
 <html class="no-js" lang="">
 
@@ -66,6 +70,13 @@ $getCarrinho = HomeController::getCarrinho();
 		============================================ -->
     <script src="{{asset('assets/js/vendor/modernizr-2.8.3.min.js')}}"></script>
     <script src="{{asset('assets/js/vendor/jquery-1.12.4.min.js')}}"></script>
+
+    @if ($submenu=="Gráfico")
+	<script src="{{asset('assets/highcharts/highcharts.js')}}"></script>
+	<script src="{{asset('assets/highcharts/modules/exporting.js')}}"></script>
+	<script src="{{asset('assets/highcharts/modules/export-data.js')}}"></script>
+	<script src="{{asset('assets/highcharts/modules/accessibility.js')}}"></script>
+	@endif
 </head>
 
 <body>
@@ -396,7 +407,7 @@ $getCarrinho = HomeController::getCarrinho();
                                         </li>
                                         <li><a href="/vendas/novo">Nova</a>
                                         </li>
-                                        <li><a href="/vendas/estado">Estado</a>
+                                        <li><a href="/vendas/grafico">Gráfico</a>
                                         </li>
                                         
                                     </ul>
@@ -498,7 +509,7 @@ $getCarrinho = HomeController::getCarrinho();
                                 </li>
                                 <li><a href="/vendas/novo">Nova</a>
                                 </li>
-                                <li><a href="/vendas/estado">Estado</a>
+                                <li><a href="/vendas/grafico">Gráfico</a>
                                 </li>
                             </ul>
                         </div>
