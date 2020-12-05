@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\ClasseProduto;
+use App\ItemVenda;
+use App\NotaVenda;
 use App\Produto;
 use App\TipoProduto;
 use Illuminate\Http\Request;
@@ -188,6 +190,39 @@ class ProdutoController extends Controller
         ];
 
         return view("ajax.getProdutoCarrinho", $data);
+    }
+
+    public function grafico(){
+        $data = [
+            'title' => "Produtos",
+            'menu' => "Produtos",
+            'submenu' => "Gráfico",
+            'type' => "form",
+
+        ];
+
+        return view("produto.grafico", $data);
+    }
+
+    public static function getProdutos(){
+        $produtos = Produto::get();
+        return $produtos;  
+    }
+
+    public static function getValuesProduto($id_produto, $ano){
+        $retorno = 0;
+        $data = [
+            'id_produto'=>$id_produto,
+            'ano'=>$ano,
+        ];
+        $produtos = ItemVenda::whereHas('nota_venda', function($query) use ($data){
+            $query->where('ano', $data['ano']);
+        })->where('id_produto', $data['id_produto'])->get();
+    
+        foreach($produtos as $produto){
+            $retorno = $retorno + $produto->valor;
+        }
+        return $retorno;
     }
 
   

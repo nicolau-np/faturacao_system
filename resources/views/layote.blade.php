@@ -389,6 +389,7 @@ if($type!="login"){
                                         <li><a href="/produtos/stoque">Stoque</a></li>
                                         <li><a href="/produtos/validade">Fora de Validade</a></li>
                                         <li><a href="/produtos/inventario">Inventário</a></li>
+                                        <li><a href="/produtos/grafico">Gráfico</a></li>
                                         @endif
                                     </ul>
                                 </li>
@@ -494,6 +495,7 @@ if($type!="login"){
                                 <li><a href="/produtos/stoque">Stoque</a></li>
                                 <li><a href="/produtos/validade">Fora de Validade</a></li>
                                 <li><a href="/produtos/inventario">Inventário</a></li>
+                                <li><a href="/produtos/grafico">Gráfico</a></li>
                                 @endif
                             </ul>
                         </div>

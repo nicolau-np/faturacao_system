@@ -1,5 +1,6 @@
 <?php
 
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -47,6 +48,7 @@ Route::group(['prefix' => '/produtos', 'middleware' => 'auth'], function () {
     Route::put('/update/{id_produto}', "ProdutoController@update")->middleware('gerenteAdmin');
     Route::get('/show/{id_produto}', "ProdutoController@show")->middleware('gerenteAdmin');
     Route::get('/inventario', "RelatorioController@inventario")->middleware('gerenteAdmin');
+    Route::get('/grafico', "ProdutoController@grafico")->middleware('gerenteAdmin');
 });
 
 Route::group(['prefix' => '/compras', 'middleware' => 'auth'], function () {
