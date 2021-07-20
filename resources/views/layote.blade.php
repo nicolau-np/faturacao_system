@@ -1,9 +1,9 @@
 @php
 use App\Http\Controllers\HomeController;
 if($type!="login"){
-   $getCarrinho = HomeController::getCarrinho(); 
+   $getCarrinho = HomeController::getCarrinho();
 }
-@endphp  
+@endphp
 
 
 <!doctype html>
@@ -80,7 +80,6 @@ if($type!="login"){
 </head>
 
 <body>
-
     @if($type!="login")
     <!--[if lt IE 8]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
@@ -94,7 +93,7 @@ if($type!="login"){
                         <a href="/">
                           <div class="logo" style="font-weight:bold; font-size: 28px; font-family:Uroob; color:#fff;">
                             no<span style="color:#000;">Caixa</span>
-                              </div>  
+                              </div>
                         </a>
                     </div>
                 </div>
@@ -245,7 +244,7 @@ if($type!="login"){
                                     </div>
                                 </div>
                             </li>
-                            
+
                             <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="notika-icon notika-menus"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>2</span></div></a>
                                 <div role="menu" class="dropdown-menu message-dd task-dd animated zoomIn">
                                     <div class="hd-mg-tt">
@@ -295,7 +294,7 @@ if($type!="login"){
 
 
                             @if (Auth::user()->nivel_acesso=="caixa" || Auth::user()->nivel_acesso=="gerente")
-                            
+
                           <li class="nav-item"><a href="#" data-toggle="dropdown" role="button" aria-expanded="false" class="nav-link dropdown-toggle"><span><i class="fa fa-cart-arrow-down"></i></span><div class="spinner4 spinner-4"></div><div class="ntd-ctn"><span>4</span></div></a>
                                 <div role="menu" class="dropdown-menu message-dd chat-dd animated zoomIn">
                                     <div class="hd-mg-tt">
@@ -324,7 +323,7 @@ if($type!="login"){
                                     @else
                                     Nenhuma nota de venda encontrada
                                     @endif
-                                        
+
                                  </div>
                                     <div class="hd-mg-va">
                                         <a href="#">Ver mais</a>
@@ -360,7 +359,7 @@ if($type!="login"){
                                         <li><a href="/funcionarios">Lista</a></li>
                                         <li><a href="/funcionarios/novo">Novo</a></li>
                                     </ul>
-                                </li> 
+                                </li>
                                 @endif
                                 @if (Auth::user()->nivel_acesso=="admin" || Auth::user()->nivel_acesso=="gerente")
                                 <li><a data-toggle="collapse" data-target="#democrou" href="#">Clientes</a>
@@ -410,7 +409,7 @@ if($type!="login"){
                                         </li>
                                         <li><a href="/vendas/grafico">Gráfico</a>
                                         </li>
-                                        
+
                                     </ul>
                                 </li>
                                 @endif
@@ -460,17 +459,17 @@ if($type!="login"){
                                 <li><a href="/">Estado Actual</a>
                                 <li><a href="{{route('logout')}}">Sair</a>
                                 </li>
-                            
+
                             </ul>
                         </div>
-                        
+
                         <div id="mailbox" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/funcionarios">Lista</a></li>
                                 <li><a href="/funcionarios/novo">Novo</a></li>
                             </ul>
                         </div>
-                        
+
                         <div id="Interface" class="tab-pane notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/clientes">Lista</a></li>
@@ -485,7 +484,7 @@ if($type!="login"){
                                 <li><a href="/fornecedores/descatados">Destacados</a></li>
                             </ul>
                         </div>
-                        
+
                         <div id="Tables" class="tab-pane @if($menu=='Produtos') in active @endif notika-tab-menu-bg animated flipInX">
                             <ul class="notika-main-menu-dropdown">
                                 <li><a href="/produtos">Lista</a></li>
@@ -515,7 +514,7 @@ if($type!="login"){
                                 </li>
                             </ul>
                         </div>
-                       
+
                     </div>
                 </div>
             </div>
@@ -529,7 +528,7 @@ if($type!="login"){
             <div class="row">
                 <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">
                     <div class="footer-copy-right">
-                        <p>Copyright © {{date('Y')}} 
+                        <p>Copyright © {{date('Y')}}
 . Todos direitos Reservados. Template by <a href="https://colorlib.com">Colorlib</a>.</p>
                     </div>
                 </div>
@@ -541,10 +540,10 @@ if($type!="login"){
         ============================================ -->
         @else
         @yield('content')
-    @endif    
+    @endif
 
 
-   
+
     <!-- bootstrap JS
 		============================================ -->
     <script src="{{asset('assets/js/bootstrap.min.js')}}"></script>
