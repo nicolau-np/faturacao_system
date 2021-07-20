@@ -17,7 +17,7 @@
                                 {{Form::open(['name'=>"form_pag", 'url'=>"/carrinho/finalizar/{$getnotaVenda->id}", 'method'=>"put"]) }}
                                 <?php
                                 $total = 0;
-                               
+
                                  foreach ($getitemVenda as $item){
                                     $total = $total + $item->valor;
                                   }
@@ -35,16 +35,16 @@
                                      </div>
                                      <div class="col-md-2">
                                          <button type="submit"><i class="fa fa-check"></i></button>
-                                        
+
                                      </div>
                                  </div>
-                                
+
                                 <div class="row">
                                     <div class="col-md-4">
                                         <span style="font-size: 16px; font-weight:bold; color:#000;">Troco:</span> <span style="font-size: 16px; font-weight:bold; color:red;" class="troco"></span>
                                     </div>
                                 </div>
-                                
+
                                 {{Form::close()}}
                             </div>
                             <table class="table table-striped">
@@ -58,7 +58,6 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    
                                     @foreach ($getitemVenda as $item_venda)
                                     {{Form::open(['name'=>"form_changeQuant", 'method'=>"put", 'url'=>"/carrinho/change_quant/{$getnotaVenda->id}/{$item_venda->id}"]) }}
                                     <tr>
@@ -74,21 +73,20 @@
                                             <i class="fa fa-plus-circle fa-2x"></i>
                                         </a>
                                         </div>
-                                     
+
                                         </td>
                                        <td>{{number_format($item_venda->valor_venda,2,',','.')}}</td>
                                        <td>{{number_format($item_venda->valor,2,',','.')}}</td>
                                        <td>
                                            <a href="#" data-id_item_venda = "{{$item_venda->id}}" class="eliminarProduto"><i class="fa fa-trash fa-2x"></i></a>
                                         </td>
-                                   </tr> 
+                                   </tr>
                                    {{Form::close()}}
                                     @endforeach
-                                   
-                                   
+
                                 </tbody>
                             <div class="links">
-                                
+
                             </div>
                             </table>
                         </div>
@@ -96,7 +94,7 @@
                 </div>
 
                 <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
-                    
+
 					@if(session('error'))
 					<div class="alert alert-danger">{{session('error')}}</div>
 					@endif
@@ -119,10 +117,10 @@
                         {{Form::open(['method'=>"put", 'name'=>"form_itemVenda", 'url'=>"/carrinho/store/{$getnotaVenda->id}"])}}
                         {{csrf_field()}}
                         <div class="row">
-                            
+
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                 
+
                                        {{Form::text('produto', null, ['class'=>"form-control produto_search", 'placeholder'=>"Pesquisar Produto ..."]) }}
                                         @if($errors->has('produto'))
                                         <span class="text-danger">{{$errors->first('produto')}}</span>
@@ -132,7 +130,7 @@
 
                             <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
                                 <div class="form-group">
-                                   
+
                                         {{Form::number('quantidade', null, ['class'=>"form-control", 'placeholder'=>"Quantidade"]) }}
                                         @if($errors->has('quantidade'))
                                         <span class="text-danger">{{$errors->first('quantidade')}}</span>
@@ -145,7 +143,7 @@
                                 {{Form::submit('Salvar', ['class'=>"btn waves-effect"])}}
                                 </div>
                             </div>
- 
+
                         </div>
                         <div class="row">
                             <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12 carregar_produtos">
@@ -157,10 +155,10 @@
                         </div>
                         {{Form::close()}}
                         <br/>
-                        
-                   
-                       
-                       
+
+
+
+
                     </div>
                 </div>
             </div>
@@ -168,9 +166,9 @@
     </div>
     <!-- Data Table area End-->
     <script>
-    
+
         $(document).ready(function(){
-            $('.produto_search').keyup(function (e) { 
+            $('.produto_search').keyup(function (e) {
                 e.preventDefault();
                 var data = {
                     produto: $(this).val()
@@ -196,13 +194,13 @@
                 var troco = valor_emposse - total_venda;
 
                 $('.troco').html(troco);
-                
+
             });
 
             $('.eliminarProduto').click(function(){
                 var id_item_venda = $(this).data('id_item_venda');
                 var confi = confirm("Deseja eliminar Produto?");
-                
+
                 if(confi == 1){
                 window.location.href = "{{ url('/carrinho/eliminarProduto/') }}/"+id_item_venda;
                 }
